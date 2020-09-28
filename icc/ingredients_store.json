@@ -1,0 +1,18 @@
+{
+    "green onion": {
+        "store method":"fridge",
+        "expiration duration": "3600 * 24 * 7",
+        "image":"something"
+    },
+    "carrot": {
+        "store method":"fridge",
+        "expiration duration": "3600 * 24 * 7",
+        "image":"something"
+    },
+    "raddish": {
+        "store method":"fridge",
+        "expiration duration": "3600 * 24 * 3",
+        "image":"something"
+    }
+
+}
