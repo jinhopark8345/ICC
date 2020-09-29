@@ -8,7 +8,24 @@
             "type": "number"
         },
         "ingredients": {
-          "type": ["number", "string"]
+            "type": "array",
+            "items": [
+                {
+                    "type": "array",
+                    "items": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "number"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                }
+            ]
         }
-    }
+    },
+    "additionalProperties": false
 }

@@ -10,41 +10,46 @@ def validateJson(jsonData, schema):
         return False
     return True
 
+def is_valid(json_data, schema):
+    print("given json_data: {}".format(json_data))
+    if validateJson(json_data, schema):
+        print("Given JSON data is Valid")
+    else:
+        print("Given JSON data is InValid")
+
+def get_schema(schema_path):
+    with open(schema_path, 'r') as f:
+        schema_data = f.read()
+    schema = json.loads(schema_data)
+    return schema
+
+def make_recipe_info():
+    direction = []
+    direction.append(["green onion water",500, "g"])
+    direction.append(["carrot", 700, "kg"])
+    direction.append(["water", 500, "ml"])
+    recipes = {}
+    recipes['recipe'] = []
+    recipes['recipe'].append({
+        'name': 'rice cake',
+        'like': 7,
+        'ingredients': direction
+    })
+
+    recipes['recipe'].append({
+        'name': 'curry',
+        'like': 5,
+        'ingredients': direction
+    })
+
+    return recipes
+
 recipe_schema_path = '../json/recipe_schema.json'
+recipe_schema = get_schema(recipe_schema_path)
+recipes_info = make_recipe_info()
 
-with open(recipe_schema_path, 'r') as f:
-    recipe_schema_data = f.read()
-
-recipe_schema = json.loads(recipe_schema_data)
-
-# Convert json to python object.
-direction = []
-direction.append([12,"water water"])
-direction.append([7,"water water water"])
-
-# jsonData = json.loads('{"name": "rice cake", "like": 7, "ingredients": [1,"asdasd"]}')
-
-data = {}
-data['recipe'] = []
-data['recipe'].append({
-    'name': 'rice cake',
-    'like': "7",
-    'ingredients': direction
-})
-
-# print(data)
-
-# ing_info_path = '../json/ing_info.json'
-# with open(ing_info_path, 'r') as ff:
-#     ing_info_str = ff.read()
-
-# ing_info = json.loads(ing_info_str)
-# ing_info_temp = ing_info['ingredient_info'][1]
+# recipe_info_temp = recipes['recipe'][0]
+recipe_info_temp = recipes_info['recipe'][1]
 
 print()
-if validateJson(data, recipe_schema):
-    print(data)
-    print("Given JSON data is Valid")
-else:
-    print(data)
-    print("Given JSON data is InValid")
+is_valid(recipe_info_temp, recipe_schema)

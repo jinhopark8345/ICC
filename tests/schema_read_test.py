@@ -22,7 +22,6 @@ def validateJson(jsonData, schema):
 ing_info_path = '../json/ing_info.json'
 with open(ing_info_path, 'r') as ff:
     ing_info_str = ff.read()
-
 ing_info = json.loads(ing_info_str)
 ing_info_temp = ing_info['ingredient_info'][1]
 
