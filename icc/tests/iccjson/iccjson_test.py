@@ -2,7 +2,7 @@ import jsonschema
 import json
 from jsonschema import validate
 
-from json import *
+from iccjson.schema import *
 
 def validateJson(jsonData, schema):
     try:
@@ -17,7 +17,6 @@ def is_valid(json_data, schema):
         print("Given JSON data is Valid")
     else:
         print("Given JSON data is InValid")
-
 
 def make_recipe_info():
     direction = []
@@ -40,12 +39,33 @@ def make_recipe_info():
 
     return recipes
 
-recipe_schema_path = '../json/recipe_schema.json'
-recipe_schema = get_schema(recipe_schema_path)
-recipes_info = make_recipe_info()
+def recipe_schema_test():
+    recipe_schema = get_schema("recipe")
+    recipes_info = make_recipe_info()
+    recipe_info = recipes_info['recipe'][1]
+    # is_valid(recipe_info_temp, recipe_schema)
 
-# recipe_info_temp = recipes['recipe'][0]
-recipe_info_temp = recipes_info['recipe'][1]
+    if validateJson(recipe_info, recipe_schema):
+        print("recipe_schmea_test passed")
+    else:
+        print("recipe_schmea_test didn't passed")
 
-print()
-is_valid(recipe_info_temp, recipe_schema)
+    pass
+
+def user_ingredient_schema_test():
+    user_ing_schema = get_schema("user_ing")
+    pass
+
+def ingredient_info_schema_test():
+    ing_info = get_schema("ing_info")
+    ing_info_test = get_test("ing_info")
+    print(ing_info_test)
+
+
+    pass
+
+
+def schema_test():
+    recipe_schema_test()
+    # user_ingredient_schema_test()
+    # ingredient_info_schema_test()
