@@ -1,0 +1,17 @@
+{
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string"
+        },
+        "quantity": {
+            "type": "number"
+        },
+        "quantity_unit": {
+            "type": "string"
+        },
+        "store_time": {
+            "type": "string"
+        }
+    }
+}

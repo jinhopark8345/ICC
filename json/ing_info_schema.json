@@ -1,0 +1,18 @@
+{
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string"
+        },
+        "store_method": {
+            "type": "string"
+        },
+        "expiration_duration": {
+            "type": "number"
+        },
+        "image": {
+            "type": "string"
+        }
+    },
+    "required": ["name", "store_method", "expiration_duration"]
+}
