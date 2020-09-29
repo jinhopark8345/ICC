@@ -2,6 +2,7 @@ import jsonschema
 import json
 from jsonschema import validate
 
+from json import *
 
 def validateJson(jsonData, schema):
     try:
@@ -17,11 +18,6 @@ def is_valid(json_data, schema):
     else:
         print("Given JSON data is InValid")
 
-def get_schema(schema_path):
-    with open(schema_path, 'r') as f:
-        schema_data = f.read()
-    schema = json.loads(schema_data)
-    return schema
 
 def make_recipe_info():
     direction = []
