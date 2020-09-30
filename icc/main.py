@@ -1,10 +1,4 @@
-from iccjson.schema import *
 
-from tests.iccjson.iccjson_test import *
+from tests.iccjson.test_schema import test_schema
 
-
-
-# print(get_schema("recipe"))
-
-
-schema_test()
+test_schema()

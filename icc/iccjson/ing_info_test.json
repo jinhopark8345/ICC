@@ -1,5 +1,5 @@
 {
-    "ingredient_info": [
+    "ing_info": [
         {
             "name": "green onion",
             "store_method": "fridge",
@@ -8,7 +8,7 @@
         {
             "name": "onion",
             "store_method": "room",
-            "expiration_duration": "7"
+            "expiration_duration": 7
         }
     ]
 }

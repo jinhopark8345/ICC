@@ -7,7 +7,7 @@
         "like": {
             "type": "number"
         },
-        "ingredients": {
+        "ings": {
             "type": "array",
             "items": [
                 {
