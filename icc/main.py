@@ -1,4 +1,6 @@
 
-from tests.iccjson.test_schema import test_schema
+from iccjson.schema import *
 
-test_schema()
+recipe_schema = get_schema("user_ing")
+recipe_test = get_test("user_ing")
+recipe_data = get_data("user_ing")

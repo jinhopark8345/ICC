@@ -9,9 +9,10 @@ def get_json(json_path):
     return json_file
 
 def get_schema(name_schema):
-    recipe_schema_path = './iccjson/recipe_schema.json'
-    user_ing_schema_path = './iccjson/user_ing_schema.json'
-    ing_info_schema_path = './iccjson/ing_info_schema.json'
+    cur_dir = os.path.dirname(os.path.realpath(__file__))
+    recipe_schema_path = cur_dir + '/recipe_schema.json'
+    user_ing_schema_path = cur_dir + '/user_ing_schema.json'
+    ing_info_schema_path = cur_dir + '/ing_info_schema.json'
 
     switcher = {
         "recipe": get_json(recipe_schema_path),
@@ -22,9 +23,10 @@ def get_schema(name_schema):
     return switcher.get(name_schema)
 
 def get_test(test_name):
-    recipe_test_path = './iccjson/recipe_test.json'
-    user_ing_test_path = './iccjson/user_ing_test.json'
-    ing_info_test_path = './iccjson/ing_info_test.json'
+    cur_dir = os.path.dirname(os.path.realpath(__file__))
+    recipe_test_path = cur_dir + '/recipe_test.json'
+    user_ing_test_path = cur_dir + '/user_ing_test.json'
+    ing_info_test_path = cur_dir + '/ing_info_test.json'
 
     switcher = {
         "recipe": get_json(recipe_test_path),
@@ -35,12 +37,14 @@ def get_test(test_name):
     return switcher.get(test_name)
 
 def get_data(name_json):
-    recipe_path= './iccjson/recipe.json'
-    user_ing_path= './iccjson/user_ing.json'
-    ing_info_path = './iccjson/ing_info.json'
+    cur_dir = os.path.dirname(os.path.realpath(__file__))
+
+    recipe_path= cur_dir + '/recipe.json'
+    user_ing_path= cur_dir + '/user_ing.json'
+    ing_info_path = cur_dir +'/ing_info.json'
 
     switcher = {
-       "recipe_json": get_json(recipe_path),
+        "recipe_json": get_json(recipe_path),
         "user_ing_json" : get_json(user_ing_path),
         "ing_info_json" : get_json(ing_info_path)
     }

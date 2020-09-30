@@ -3,11 +3,13 @@ import json
 from jsonschema import validate
 
 import unittest
+from icc.iccjson.schema import *
 
-import sys, os.path
-icc_dir = (os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
-sys.path.insert(0, icc_dir)
-from iccjson.schema import get_schema, get_test
+# import sys, os.path
+# icc_dir = (os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+# print(__file__)
+# sys.path.insert(0, icc_dir)
+
 
 
 def validateJson(jsonData, schema):
@@ -38,9 +40,3 @@ def test_ing_info_schema():
     assert validateJson(ing_infos['ing_info'][0], ing_info_schema) == False
     assert validateJson(ing_infos['ing_info'][1], ing_info_schema) == True
 
-def test_schema():
-    test_recipe_schema()
-    test_user_ing_schema()
-    test_ing_info_schema()
-
-test_schema()
