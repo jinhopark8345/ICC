@@ -67,11 +67,16 @@ def ingredient_info_schema_test():
     ing_info_schema = get_schema("ing_info")  
     ing_infos = get_json("ing_info_json")
     ing_info = ing_infos['ingredient_info'][0]
-    print(ing_infos)
-    if validateJson(ing_info, ing_info_schema):
-        print("user_ingredient_schema_test passed")
-    else:
-        print("user_ingredient_schema_test didn't passed")
+    print(len(ing_infos['ingredient_info']))
+
+    for i in range ( len(ing_infos['ingredient_info']) ):
+        ing_info = ing_infos['ingredient_info'][i]
+        if validateJson(ing_info, ing_info_schema):
+            print("user_ingredient_schema_test passed")
+        else:
+            print("array number =  " , i)
+            print("user_ingredient_schema_test didn't passed")
+        
 
 
     
