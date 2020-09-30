@@ -67,7 +67,7 @@ def user_ingredient_schema_test():
     pass
 def ingredient_info_schema_test():
     ing_info = get_schema("ing_info")
-    print(ing_info_test) 
+    print(ing_info_test)
 
 
     pass

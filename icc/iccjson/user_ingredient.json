@@ -2,7 +2,7 @@
     "user_ingredient": [
         {
             "name": "green onion",
-            "quantity": 500,
+            "quantity": "500",
             "quantity_unit": "g",
             "store_time": "2020-09-27 11:43"
         },
