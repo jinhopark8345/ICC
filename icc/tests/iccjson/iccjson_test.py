@@ -55,10 +55,8 @@ def recipe_schema_test():
 
 def user_ingredient_schema_test():
     user_ing_schema = get_schema("user_ing")
-    print(user_ing_schema)
     user_ing_infos = get_json("user_ing_json")
     user_ing_info = user_ing_infos['user_ingredient'][0]
-    print(user_ing_info)
     if validateJson(user_ing_info, user_ing_schema):
         print("user_ingredient_schema_test passed")
     else:
@@ -66,8 +64,17 @@ def user_ingredient_schema_test():
 
     pass
 def ingredient_info_schema_test():
-    ing_info = get_schema("ing_info")
-    print(ing_info_test)
+    ing_info_schema = get_schema("ing_info")  
+    ing_infos = get_json("ing_info_json")
+    ing_info = ing_infos['ingredient_info'][0]
+    print(ing_infos)
+    if validateJson(ing_info, ing_info_schema):
+        print("user_ingredient_schema_test passed")
+    else:
+        print("user_ingredient_schema_test didn't passed")
+
+
+    
 
 
     pass
@@ -76,5 +83,5 @@ def ingredient_info_schema_test():
 def schema_test():
     recipe_schema_test()
     user_ingredient_schema_test()
-    # ingredient_info_schema_test()
+    ingredient_info_schema_test()
 

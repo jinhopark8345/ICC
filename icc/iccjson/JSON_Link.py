@@ -11,13 +11,12 @@ def find_json(json_path):
 def get_json(name_json):
     #recipe_json_path = './iccjson/recipe_test.json'
     user_ingredient_json_path = './iccjson/user_ingredient.json'
-    #user_ingredient_json_path = 'user_ingredient.json'
-    #ing_info_json_path = './iccjson/ingredient_info.json'
+    ing_info_json_path = './iccjson/ingredient_info.json'
 
     switcher = {
      #   "recipe_json": find_json(recipe_json_path),
         "user_ing_json" : find_json(user_ingredient_json_path),
-        #"ing_info_json" : find_json(ing_info_json_path)
+        "ing_info_json" : find_json(ing_info_json_path)
     }
     
     return switcher.get(name_json)
