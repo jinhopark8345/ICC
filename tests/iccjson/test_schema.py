@@ -5,13 +5,6 @@ from jsonschema import validate
 import unittest
 from icc.iccjson.schema import *
 
-# import sys, os.path
-# icc_dir = (os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
-# print(__file__)
-# sys.path.insert(0, icc_dir)
-
-
-
 def validateJson(jsonData, schema):
     try:
         validate(instance=jsonData, schema=schema)
@@ -22,21 +15,19 @@ def validateJson(jsonData, schema):
 def test_recipe_schema():
     recipe_schema = get_schema("recipe")
     recipes_test = get_test("recipe")
-    recipe_test = recipes_test['recipe'][0]
+    recipe_test = recipes_test[0]
 
     assert validateJson(recipe_test, recipe_schema) == True
 
 def test_user_ing_schema():
     user_ing_schema = get_schema("user_ing")
     user_ing_infos = get_test("user_ing")
-    user_ing_info = user_ing_infos['user_ing'][0]
+    user_ing_info = user_ing_infos[0]
 
     assert validateJson(user_ing_info, user_ing_schema) == True
 
 def test_ing_info_schema():
     ing_info_schema = get_schema("ing_info")
-
     ing_infos = get_test("ing_info")
-    assert validateJson(ing_infos['ing_info'][0], ing_info_schema) == False
-    assert validateJson(ing_infos['ing_info'][1], ing_info_schema) == True
-
+    assert validateJson(ing_infos[0], ing_info_schema) == False
+    assert validateJson(ing_infos[1], ing_info_schema) == True

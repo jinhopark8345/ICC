@@ -50,3 +50,4 @@ def get_data(name_json):
     }
     
     return switcher.get(name_json)
+
