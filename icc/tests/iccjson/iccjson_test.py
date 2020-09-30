@@ -3,7 +3,7 @@ import json
 from jsonschema import validate
 
 from iccjson.schema import *
-from iccjson.JSON_Link import *
+#from iccjson.JSON_Link import *
 
 def validateJson(jsonData, schema):
     try:
