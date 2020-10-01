@@ -1,0 +1,33 @@
+[
+    {
+        "name": "green onion",
+        "store_method": "fridge",
+        "expiration_duration": 30
+    },
+    {
+        "name": "onion",
+        "store_method": "room",
+        "expiration_duration": 7
+    },
+    {
+        "name": "Cheongyang peppers",
+        "store_method": "firdge",
+        "expiration_duration": 4
+    },
+    {
+        "name": "kimchi",
+        "store_method": "frdige",
+        "expiration_duration": 180
+    },
+    {
+        "name": "red pepper",
+        "store_method": "frdige",
+        "expiration_duration": 10
+    },
+    {
+        "name": "B",
+        "store_method": "room",
+        "expiration_duration": 10
+    }
+  
+]
