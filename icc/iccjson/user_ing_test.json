@@ -11,4 +11,18 @@
         "quantity_unit": "kg",
         "store_time": "2020-09-28 15:33"
     }
+,
+    {
+        "name": "onion",
+        "quantity": 232,
+        "quantity_unit": "kg",
+        "store_time": "2020-09-28 15:33"
+    },
+    {
+        "name": "raddish",
+        "quantity": 232,
+        "quantity_unit": "kg",
+        "store_time": "2020-09-28 15:33"
+    }
 ]
+
