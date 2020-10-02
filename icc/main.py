@@ -9,7 +9,8 @@ from iccjson.function import *
 
 #ingredient_info_schema = get_schema("ing_info")
 #ingredient_info_test = get_test("ing_info")
-user_ing = get_data("ing_info")
+
+user_ing = get_data("user_ing")
 
 #print(recipe_schema)
 #print(recipe_test)
@@ -18,6 +19,18 @@ user_ing = get_data("ing_info")
 #print(ingredient_info_schema)
 #print(ingredient_info_test)
 
-print(user_ing)
+#print(user_ing)
 
-find_recipe_ing()
+#find_recipe_ing()
+user_ing_data = get_data("user_ing")
+recipe_data = get_data("recipe")
+compare_data = compare_ing(user_ing_data,recipe_data)
+#print(compare_data)
+#print(recipe_data)
+
+need_data = need_recipe(recipe_data, compare_data)
+
+print(need_data)
+#
+#need_recipe(recipe_data, compare_data)
+
