@@ -25,7 +25,7 @@ user_ing = get_data("user_ing")
 user_ing_data = get_data("user_ing")
 recipe_data = get_data("recipe")
 compare_data = compare_ing(user_ing_data,recipe_data)
-
+print(compare_data)
 
 need_data = need_recipe(recipe_data, compare_data)
 recommend_recipe = recommend_recipe(need_data,recipe_data)
