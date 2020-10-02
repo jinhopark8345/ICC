@@ -3,7 +3,7 @@ import json
 from jsonschema import validate
 
 import unittest
-from icc.iccjson.schema import *
+from icc.iccjson.jconnect import *
 
 def validateJson(jsonData, schema):
     try:

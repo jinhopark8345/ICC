@@ -1,35 +1,23 @@
-from iccjson.schema import *
-from iccjson.function import *
+from iccjson.jconnect import *
+from recommend.compare_recipe import *
+from recommend.recommend_recipe import *
 
-#from tests.iccjson.iccjson_test import *
+user_ings = get_data("user_ing")
+recipes = get_data("recipe")
 
-#recipe_schema = get_schema("recipe")
-#recipe_test = get_test("recipe")
-#recipe_data = get_data("recipe")
+recipes_needed_ings = []
+for recipe in recipes:
+   print("making {}...".format(recipe['name']))
+   need_ings = need_recipe(user_ings, recipe)
+   print("need {}...".format(need_ings))
 
-#ingredient_info_schema = get_schema("ing_info")
-#ingredient_info_test = get_test("ing_info")
+   print("cur_need quantity", get_total_quantity(need_ings))
+   cur_total_quan = get_total_quantity(need_ings)
 
-user_ing = get_data("user_ing")
-
-#print(recipe_schema)
-#print(recipe_test)
-#print(recipe_data)
-
-#print(ingredient_info_schema)
-#print(ingredient_info_test)
-
-#print(user_ing)
-
-#find_recipe_ing()
-user_ing_data = get_data("user_ing")
-recipe_data = get_data("recipe")
-compare_data = compare_ing(user_ing_data,recipe_data)
+   # collect need ings quantity
+   recipes_needed_ings.append([cur_total_quan, recipe['name']])
 
 
-need_data = need_recipe(recipe_data, compare_data)
-recommend_recipe = recommend_recipe(need_data,recipe_data)
-
-
-print(recommend_recipe)
-
+   # recommend one recipe based on needed quantity
+rec_recipe = recommend_recipe(recipes_needed_ings)
+print(rec_recipe)
