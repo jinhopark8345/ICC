@@ -4,7 +4,7 @@ from iccjson.schema import *
 
 
 
-def print_test():
+def print_test(): ### 사용x
     cur_dir = os.path.dirname(os.path.realpath(__file__))
     print("function_Test")
 
@@ -28,7 +28,6 @@ def compare_ing(user_ing_data,recipe_data): ####### compare user_ing and recipe_
 
 def need_recipe(recipe_data, compare_data):
     need_data = copy.deepcopy( recipe_data )
-    print(recipe_data[0]['ings'][0][1])
     for i in range ( len(recipe_data) ):
         for j in range( len(recipe_data[i]['ings']) ):
             need_data[i]['ings'][j][1]=recipe_data[i]['ings'][j][1] - compare_data[i]['ings'][j][1] 
@@ -36,17 +35,17 @@ def need_recipe(recipe_data, compare_data):
 
     return need_data
 
-def recommend_recipe(need_data):
-    recom
+def recommend_recipe(need_data, recipe_data): ## need 에 값에 따라 가중치 부여
+    recommed_recipe = []
+    total_price = 0
     for i in range ( len(need_data) ):
         for j in range( len(need_data[i]['ings']) ):
-             need_data[
-           
+            total_price = total_price + need_data[i]['ings'][j][1]
+        recommed_recipe.append(total_price)
+    a = recommed_recipe.index(min(recommed_recipe)) -1
 
-
-
-
-    return recommed_recipe
+    return recipe_data[a]['name']
+    
 
 
 
