@@ -27,7 +27,13 @@
                 "name": "water3",
                 "quantity": 477,
                 "quantity_unit": "ml"
+            },
+            {
+                "name": "kimchi",
+                "quantity": 359,
+                "quantity_unit": "kg"
             }
+
         ]
     },
     {

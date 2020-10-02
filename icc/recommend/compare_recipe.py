@@ -1,51 +1,40 @@
-
-# compare two ingredient and return difference
 def get_diff_ing(ask_ing, user_ing):
-    ing = []
+    """ compare two ingredient if they have same name return the difference in terms of quantity"""
+    ing = {}
 
-    # append ing name
-    ing.append(ask_ing['name'])
-    # append quantity diff
-    # print(ask_ing['quantity'])
-    # print(user_ing['quantity'])
-    ing.append(ask_ing['quantity'] - user_ing['quantity'])
-    # append unit
-    ing.append(ask_ing['quantity_unit'])
+    if ing["name"] == ask_ing["name"]:
+        ing["quantity"] = ask_ing["quantity"] - user_ing["quantity"]
+        ing["quantity_unit"] = ask_ing["quantity_unit"]
 
     return ing
 
-# how much more "the ingredient" does user need?
+
+# how much more "ask_ingredient" does user need?
+# compare "ask_ingredient" that user need from "user_ingredients"
+# ask_ing : ingredient that user need to make the recipe
+# user_ings : ingredients user has
 def get_need_ing(ask_ing, user_ings):
-    print("user_ings: {}, user_ings_len: {}".format(user_ings, len(user_ings)))
-    for ing in user_ings:
-        print("need_ing function, each ing:",ing)
+    # new_dict = dict((item['id'], item) for item in initial_list)
+    # match_ing = dict((user_ing) for user_ing in user_ings if user_ing['name'] == ask_ing['name'])
+    match_ing = next(
+        (user_ing for user_ing in user_ings if user_ing["name"] == ask_ing["name"]),
+        None,
+    )
 
-        # 찾는 재료가, 유저한테 있을 경우 -> 필요한 양 리턴
-        if ask_ing['name'] in ing['name']:
-            return get_diff_ing(ask_ing, ing)
+    if match_ing != None:
+        return get_diff_ing(ask_ing, match_ing)
 
-        # 찾는 재료가, 유저한테 없을 경우
-        else:
-            return ask_ing
+    else:
+        return ask_ing
 
 
-# find need ingredient"s" from "one" recipe
-def need_recipe(user_ings, recipe):
-    # print(recipe)
-
-    need_ings = []
-    # for j in range(len(recipe['ings'])):
-    #     cur_recipe_ing = recipe['ings'][j]
-    #     cur_need_ing = need_ing(cur_recipe_ing, user_ings)
-    #     need_ings.append(cur_need_ing)
-    # return need_ings;
-
-    # print("need_recipe, recipe: ", recipe['ings'])
-    # print("need_recipe, recipe[1]: ", recipe['ings'][1])
-
-    for cur_recipe_ing in recipe['ings']:
-        print(cur_recipe_ing['name'])
+# find ingredient"s" that user need to make the one recipe
+# user_ings : ingredients user has
+# recipe: recipe that user tries to make
+def get_need_ings(user_ings, recipe):
+    need_recipe_ings = []
+    for cur_recipe_ing in recipe["ings"]:
         cur_need_ing = get_need_ing(cur_recipe_ing, user_ings)
-        need_ings.append(cur_need_ing)
+        need_recipe_ings.append(cur_need_ing)
 
-    return need_ings
+    return need_recipe_ings

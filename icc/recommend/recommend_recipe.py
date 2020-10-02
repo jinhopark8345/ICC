@@ -3,13 +3,9 @@ def get_total_quantity(need_ings):
 
     total_quan = 0
     for ing in need_ings:
-        total_quan = total_quan + ing['quantity']
-
+        total_quan = total_quan + ing["quantity"]
     return total_quan
 
-# def jin_temp(recipe):
-#     return recipe[0]
 def recommend_recipe(recipes_need_quantity):
-    ing = min(recipes_need_quantity, key= lambda recipe:recipe['name'])
-    # ing = min(recipes_need_quantity, key= jin_temp)
-    return ing['quantity']
+    ing = min(recipes_need_quantity, key=lambda recipe: recipe[0])
+    return ing[1]
