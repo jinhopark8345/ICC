@@ -1,46 +1,44 @@
-{
-    "recipe": [
-        {
-            "name": "rice cake",
-            "like": 7,
-            "ings": [
-                [
-                    "green onion water",
-                    500,
-                    "g"
-                ],
-                [
-                    "carrot",
-                    700,
-                    "kg"
-                ],
-                [
-                    "water",
-                    500,
-                    "ml"
-                ]
+[
+    {
+        "name": "rice cake",
+        "like": 7,
+        "ings": [
+            [
+                "green onion",
+                500,
+                "g"
+            ],
+            [
+                "pepper",
+                700,
+                "kg"
+            ],
+            [
+                "water",
+                500,
+                "ml"
             ]
-        },
-        {
-            "name": "curry",
-            "like": 5,
-            "ings": [
-                [
-                    "green onion water",
-                    500,
-                    "g"
-                ],
-                [
-                    "carrot",
-                    700,
-                    "kg"
-                ],
-                [
-                    "water",
-                    500,
-                    "ml"
-                ]
+        ]
+    },
+    {
+        "name": "curry",
+        "like": 5,
+        "ings": [
+            [
+                "red pepper",
+                500,
+                "g"
+            ],
+            [
+                "onion",
+                700,
+                "kg"
+            ],
+            [
+                "kimchi",
+                20,
+                "kg"
             ]
-        }
-    ]
-}
+        ]
+    }
+]

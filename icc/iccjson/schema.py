@@ -44,9 +44,9 @@ def get_data(name_json):
     ing_info_path = cur_dir +'/ing_info.json'
 
     switcher = {
-        "recipe_json": get_json(recipe_path),
-        "user_ing_json" : get_json(user_ing_path),
-        "ing_info_json" : get_json(ing_info_path)
+        "recipe": get_json(recipe_path),
+        "user_ing" : get_json(user_ing_path),
+        "ing_info" : get_json(ing_info_path)
     }
     
     return switcher.get(name_json)

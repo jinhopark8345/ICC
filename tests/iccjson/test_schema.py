@@ -22,12 +22,15 @@ def test_recipe_schema():
 def test_user_ing_schema():
     user_ing_schema = get_schema("user_ing")
     user_ing_infos = get_test("user_ing")
-    user_ing_info = user_ing_infos[0]
-
-    assert validateJson(user_ing_info, user_ing_schema) == True
+    print(type(user_ing_infos))
+    for i in range (len(user_ing_infos)):
+        user_ing_info = user_ing_infos[i]
+        assert validateJson(user_ing_info, user_ing_schema) == True
 
 def test_ing_info_schema():
     ing_info_schema = get_schema("ing_info")
     ing_infos = get_test("ing_info")
-    assert validateJson(ing_infos[0], ing_info_schema) == False
-    assert validateJson(ing_infos[1], ing_info_schema) == True
+    for i in range (len(ing_infos)):
+        ing_info = ing_infos[i]
+        assert validateJson(ing_info, ing_info_schema) == True
+    
