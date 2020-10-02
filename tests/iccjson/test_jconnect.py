@@ -2,8 +2,15 @@ import jsonschema
 import json
 from jsonschema import validate
 
-import unittest
+import sys, os
+print(os.getcwd())
+# import sys, os.path
+# temp_dir = (os.path.abspath(os.path.join(os.path.dirname(__file__), ../../)))
+# print(temp_dir)
+
 from icc.iccjson.jconnect import *
+# from iccjson.jconnect import *
+
 
 def validateJson(jsonData, schema):
     try:
@@ -17,7 +24,23 @@ def test_recipe_schema():
     recipes_test = get_test("recipe")
     recipe_test = recipes_test[0]
 
+    # print(recipe_test)
+    # print(recipe_schema)
+
     assert validateJson(recipe_test, recipe_schema) == True
+
+
+# def test_ing_recipe_ing_schmea():
+#     recipe_schema = get_schema("recipe")
+#     recipes_test = get_test("recipe")
+#     recipe_test = recipes_test[0]
+
+#     # print(recipe_test)
+#     print(recipe_schema['properties'])
+
+#     for ing in recipe_test['ings']:
+#         assert validateJson(ing, recipe_schema['properties']['ings']) == True
+
 
 def test_user_ing_schema():
     user_ing_schema = get_schema("user_ing")
@@ -33,4 +56,3 @@ def test_ing_info_schema():
     for i in range (len(ing_infos)):
         ing_info = ing_infos[i]
         assert validateJson(ing_info, ing_info_schema) == True
-    
