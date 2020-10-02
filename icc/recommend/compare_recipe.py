@@ -1,40 +1,84 @@
+def is_comparable(ask_ing, user_ing):
+    """tell if the ingredients are comparable
+
+    Args:
+        ask_ing: ingredient from recipe
+        user_ing: ingredient from user
+
+    Returns:
+        return True if they have same name and same quantity_unit
+
+    """
+
+    if (ask_ing["name"] == user_ing["name"]) and (
+        ask_ing["quantity_unit"] == user_ing["quantity_unit"]
+    ):
+        return True
+
+    return False
+
+
 def get_diff_ing(ask_ing, user_ing):
-    """ compare two ingredient if they have same name return the difference in terms of quantity"""
-    ing = {}
+    """compare two "same" ingredients
 
-    if ing["name"] == ask_ing["name"]:
-        ing["quantity"] = ask_ing["quantity"] - user_ing["quantity"]
-        ing["quantity_unit"] = ask_ing["quantity_unit"]
+    Args:
+        ask_ing: ingredient from recipe
+        user_ing: ingredient from user
 
-    return ing
+    Returns:
+        return the dictionary of difference in terms of quantity
+
+    """
+    if is_comparable(ask_ing, user_ing):
+        return {
+            "name": ask_ing["name"],
+            "quantity": ask_ing["quantity"] - user_ing["quantity"],
+            "quantity_unit": ask_ing["quantity_unit"],
+        }
+    else:
+        print("wrong use case")
 
 
-# how much more "ask_ingredient" does user need?
-# compare "ask_ingredient" that user need from "user_ingredients"
-# ask_ing : ingredient that user need to make the recipe
-# user_ings : ingredients user has
 def get_need_ing(ask_ing, user_ings):
-    # new_dict = dict((item['id'], item) for item in initial_list)
-    # match_ing = dict((user_ing) for user_ing in user_ings if user_ing['name'] == ask_ing['name'])
-    match_ing = next(
-        (user_ing for user_ing in user_ings if user_ing["name"] == ask_ing["name"]),
-        None,
+    """how much more "ask_ingredient" does user need?
+    compare "ask_ingredient" that user need from user_ingredients"
+
+        Args:
+           ask_ing: A ingredient from a recipe
+           user_ings: ingredinets that user has
+
+        Returns:
+            if user has the ingredient with same name, then return the
+            quantity that user need if user does not have the
+            ingredient with same name, then return the whole
+            ingredient the recipe require
+
+    """
+
+    need_ing = next(
+        (
+            (get_diff_ing(ask_ing, user_ing))
+            for user_ing in user_ings
+            if is_comparable(user_ing, ask_ing)
+        ),
+        ask_ing,
     )
 
-    if match_ing != None:
-        return get_diff_ing(ask_ing, match_ing)
-
-    else:
-        return ask_ing
+    return need_ing
 
 
-# find ingredient"s" that user need to make the one recipe
-# user_ings : ingredients user has
-# recipe: recipe that user tries to make
-def get_need_ings(user_ings, recipe):
-    need_recipe_ings = []
-    for cur_recipe_ing in recipe["ings"]:
-        cur_need_ing = get_need_ing(cur_recipe_ing, user_ings)
-        need_recipe_ings.append(cur_need_ing)
+def get_need_ings(recipe, user_ings):
+    """find ingredinets that user need to make the recipe
 
-    return need_recipe_ings
+    Args:
+       user_ings ingreidents that user has
+       recipe recipe that user tries to make
+
+    Returns:
+        ingredients that user need to make the recipe
+
+    """
+    need_ings = [
+        get_need_ing(cur_need_ing, user_ings) for cur_need_ing in recipe["ings"]
+    ]
+    return need_ings

@@ -1,11 +1,27 @@
-# need 에 값에 따라 가중치 부여
 def get_total_quantity(need_ings):
+    """get sum of quantity of ingredients that user needs to make the recipe
 
-    total_quan = 0
-    for ing in need_ings:
-        total_quan = total_quan + ing["quantity"]
-    return total_quan
+    Args:
+       need_ings ingredients that user needs
+
+    Returns:
+        sum of quantity
+
+    """
+    return sum([ing["quantity"] for ing in need_ings])
+
 
 def recommend_recipe(recipes_need_quantity):
+    """find smallest quantity among quantities
+
+    Args:
+        recipes_need_quantity list of quantity total, each quantity total
+       show how much quantity user needs to make the recipe
+
+    Returns:
+        name of the recipe
+
+    """
+
     ing = min(recipes_need_quantity, key=lambda recipe: recipe[0])
     return ing[1]
