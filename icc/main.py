@@ -11,9 +11,9 @@ recipes_needed_ings = []
 # print("user_ings: {}".format(user_ings))
 for recipe in recipes:
 
-    print("making {}...".format(recipe["name"]))
-    need_ings = get_need_ings(user_ings, recipe)
-    print("need {}...".format(need_ings))
+    print("making: {}...".format(recipe["name"]))
+    need_ings = get_need_ings(recipe, user_ings)
+    print("need: {}...".format(need_ings))
 
     print("cur_need quantity", get_total_quantity(need_ings))
     cur_total_quan = get_total_quantity(need_ings)

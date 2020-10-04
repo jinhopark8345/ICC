@@ -71,7 +71,7 @@ def get_need_ings(recipe, user_ings):
     """find ingredinets that user need to make the recipe
 
     Args:
-       user_ings ingreidents that user has
+       user_ings [] ingreidents that user has
        recipe recipe that user tries to make
 
     Returns:
