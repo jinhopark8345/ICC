@@ -12,18 +12,17 @@
             "items": [
                 {
                     "type": "object",
-                    "properties": {
-                        "name": {
+                    "items": [
+                        {
                             "type": "string"
                         },
-                        "quantity": {
+                        {
                             "type": "number"
                         },
-                        "quantity_unit": {
+                        {
                             "type": "string"
                         }
-                    },
-                    "additionalProperties": false
+                    ]
                 }
             ]
         }

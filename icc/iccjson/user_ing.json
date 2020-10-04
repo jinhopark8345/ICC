@@ -1,0 +1,27 @@
+[
+    {
+        "name": "green onion",
+        "quantity": 100,
+        "quantity_unit": "g",
+        "store_time": "2020-09-27 11:43"
+    },
+    {
+        "name": "pepper",
+        "quantity": 200,
+        "quantity_unit": "kg",
+        "store_time": "2020-09-28 15:33"
+    }
+,
+    {
+        "name": "onion",
+        "quantity": 300,
+        "quantity_unit": "kg",
+        "store_time": "2020-09-28 15:33"
+    },
+    {
+        "name": "kimchi",
+        "quantity": 400,
+        "quantity_unit": "kg",
+        "store_time": "2020-09-28 15:33"
+    }
+]

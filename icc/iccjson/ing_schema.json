@@ -4,15 +4,12 @@
         "name": {
             "type": "string"
         },
-        "store_method": {
-            "type": "string"
-        },
-        "expiration_duration": {
+        "quantity": {
             "type": "number"
         },
-        "image": {
+        "quantity_unit": {
             "type": "string"
         }
     },
-    "required": ["name", "store_method", "expiration_duration"]
+    "additionalProperties": false
 }
