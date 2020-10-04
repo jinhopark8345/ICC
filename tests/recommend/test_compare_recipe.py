@@ -62,19 +62,19 @@ def test_get_need_ing():
 
     # recipe = make_ings_recipe()
     ing1 = make_ing("onion", 500, "g")
-    ing2 = make_ing("tree", 10, "g")
 
     ing3 = make_ing("onion", 100, "g")
     ing4 = make_ing("red onion", 400, "g")
     ing5 = make_ing("apple", 400, "g")
-
     user_ings = [ing3, ing4, ing5]
 
     result_ing = make_ing("onion", ing1["quantity"] - ing3["quantity"], "g")
-    result_ing2 = ing2
-
     assert get_need_ing(ing1, user_ings) == result_ing
+
+    ing2 = make_ing("tree", 10, "g")
+    result_ing2 = ing2
     assert get_need_ing(ing2, user_ings) == result_ing2
+
 
 
 
