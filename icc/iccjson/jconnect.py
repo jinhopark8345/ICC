@@ -15,8 +15,10 @@ def get_schema(name_schema):
     recipe_schema_path = cur_dir + '/recipe_schema.json'
     user_ing_schema_path = cur_dir + '/user_ing_schema.json'
     ing_info_schema_path = cur_dir + '/ing_info_schema.json'
+    ing_schema_path = cur_dir + '/ing_schema.json'
 
     switcher = {
+        "ing": get_json(ing_schema_path),
         "recipe": get_json(recipe_schema_path),
         "user_ing" : get_json(user_ing_schema_path),
         "ing_info" : get_json(ing_info_schema_path)
@@ -29,8 +31,10 @@ def get_test(test_name):
     recipe_test_path = cur_dir + '/recipe_test.json'
     user_ing_test_path = cur_dir + '/user_ing_test.json'
     ing_info_test_path = cur_dir + '/ing_info_test.json'
+    ing_test_path = cur_dir + '/ing_test.json'
 
     switcher = {
+        "ing": get_json(ing_test_path),
         "recipe": get_json(recipe_test_path),
         "user_ing" : get_json(user_ing_test_path),
         "ing_info" : get_json(ing_info_test_path)

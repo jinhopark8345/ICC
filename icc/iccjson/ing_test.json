@@ -1,0 +1,39 @@
+[
+    {
+        "name": "green onion",
+        "quantity": 500,
+        "quantity_unit": "g"
+    },
+    {
+        "name": "pepper",
+        "quantity": "700",
+        "quantity_unit": "kg"
+    },
+    {
+        "name": "water",
+        "quantity": "500",
+        "quantity_unit": "ml"
+    },
+    {
+        "name": "water2",
+        "quantity": 500,
+        "quantity_unit": 4
+    },
+    {
+        "name": "water3",
+        "quantity": 477,
+        "quantity_unit": "ml"
+    },
+    {
+        "name": 123,
+        "quantity": 359,
+        "quantity_unit": "kg"
+    },
+    {
+        "name": "foooood",
+        "quantity": 359,
+        "quantity_unit": "kg"
+    }
+
+
+]

@@ -12,6 +12,34 @@ def validateJson(jsonData, schema):
     return True
 
 
+def test_ing_schema():
+    '''
+    should update this part
+    using separate schema file for ingredient
+
+    # ing_schema = get_schema("ing")
+    # print(ing_schema)
+    # ing = ing_test[0]
+    # ing_schema = get_schema("ing")
+    '''
+    ing_test = get_test("ing")
+    recipe_schema = get_schema("recipe")
+    ing_schema = recipe_schema['properties']["ings"]['items'][0]
+    # print(ing_schema)
+
+
+    assert validateJson(ing_test[0], ing_schema) == True
+    assert validateJson(ing_test[1], ing_schema) == False
+    assert validateJson(ing_test[2], ing_schema) == False
+    assert validateJson(ing_test[3], ing_schema) == False
+    assert validateJson(ing_test[4], ing_schema) == True
+    assert validateJson(ing_test[5], ing_schema) == False
+    assert validateJson(ing_test[6], ing_schema) == True
+
+
+
+
+
 def test_recipe_schema():
     recipe_schema = get_schema("recipe")
     recipes_test = get_test("recipe")
