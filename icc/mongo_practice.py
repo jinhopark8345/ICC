@@ -15,19 +15,35 @@ from recommend.recommend_recipe import *
 # print(type(recipes_data[0]))
 # print(type(user_ings_data))
 
+
+def make_ing(name, quantity, unit, date):
+    return {
+        "name": name,
+        "quantity": quantity,
+        "quantity_unit": unit,
+        "store_time": date,
+    }
+
 client = MongoClient()
+db = client.icc
+user_ing = db.user_ing
+
+ing5 = make_ing("onion", 500, "g", "2020-10-07 13:34")
+
+def add_ing(ing, user_ing): # ing: ingredient json {}, user_ing: db.collection
+    user_ing.insert_one(ing)
+
+    # need to check if same name ingredient exist
+
+    # no -> add
+
+    # yes -> update quantity
 
 
-db = client.test_database2
+def find_ing(ing_name, user_ing):
+    ing = user_ing.find_one({'name': ing_name})
+    return ing
 
-posts = db.posts
-post_data = {
-    'title': 'Python and MongoDB',
-    'content': 'PyMongo is fun, you guys',
-    'author': 'Scott'
-}
-result = posts.insert_one(post_data)
-print('One post: {0}'.format(result.inserted_id))
-
-bills_post = posts.find_one({'author': 'Scott'})
-print(bills_post)
+# add_ing(ing5, user_ing)
+output_ing = find_ing('onion', user_ing)
+print(output_ing['quantity'])
