@@ -34,7 +34,8 @@ def main():
 
 # main()
 
-icc_db = Icc_db('icc')
+icc_db = Icc_db("icc")
+
 
 def make_ing(name, quantity, unit, date):
     return {
@@ -44,9 +45,14 @@ def make_ing(name, quantity, unit, date):
         "store_time": date,
     }
 
-ing_example = make_ing("onion", 500, "g", "2020-10-07 13:34")
-# ing_example = make_ing("apple", 400, "g", "2020-10-07 20:34")
 
+ing_example = make_ing("onion", 600, "g", "2020-10-07 13:34")
+# ing_example = make_ing("apple", 400, "g", "2020-10-07 20:34")
 # icc_db.add_user_ing(ing_example)
-onion_ing = icc_db.find_user_ing('onion')
+
+onion_ing = icc_db.find_user_ing("onion")
+print(onion_ing)
+
+icc_db.update_user_ing(ing_example)
+onion_ing = icc_db.find_user_ing("onion")
 print(onion_ing)

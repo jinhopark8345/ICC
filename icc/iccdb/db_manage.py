@@ -21,14 +21,33 @@ class Icc_db:
     def __init__(self, db_name):
         # start db, if it's not on / should do it later
         self.client = MongoClient()
-        self.db = self.client.icc
+        # self.db = self.client.db_name
+        self.db = self.client[db_name]
 
         self.user_ing = self.db.user_ing
         self.recipe = self.db.recipe
         self.ing_info = self.db.ing_info
 
+    def update_user_ing(self, ing):
+        # ing: ingredient json {}, user_ing: db.collection
+
+        # https://docs.mongodb.com/manual/reference/operator/update/
+        # $inc is update operators
+        if self.user_ing.find_one_and_update(
+            {'name': ing['name']}, \
+                {'$inc': {'quantity':ing['quantity']}}, \
+                upsert=True \
+            ) == None:
+            add_user_ing(ing)
+
+
     def add_user_ing(self, ing): # ing: ingredient json {}, user_ing: db.collection
-        self.user_ing.insert_one(ing)
+
+        # add ing to user_ing collection if user doesn't have the ing
+        if self.find_user_ing(ing) == None:
+            self.user_ing.insert_one(ing)
+        # update ing to user_ing collection if user already have the ing
+
         # need to check if same name ingredient exist
 
         # no -> add
