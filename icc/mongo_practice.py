@@ -25,10 +25,11 @@ def make_ing(name, quantity, unit, date):
     }
 
 client = MongoClient()
-db = client.icc
+db = client.icc_test
 user_ing = db.user_ing
 
-ing5 = make_ing("onion", 500, "g", "2020-10-07 13:34")
+# ing_example = make_ing("onion", 500, "g", "2020-10-07 13:34")
+ing_example = make_ing("apple", 400, "g", "2020-10-07 20:34")
 
 def add_ing(ing, user_ing): # ing: ingredient json {}, user_ing: db.collection
     user_ing.insert_one(ing)
@@ -44,6 +45,10 @@ def find_ing(ing_name, user_ing):
     ing = user_ing.find_one({'name': ing_name})
     return ing
 
-# add_ing(ing5, user_ing)
-output_ing = find_ing('onion', user_ing)
+# add_ing(ing_example, user_ing)
+output_ing = find_ing('apple', user_ing)
 print(output_ing['quantity'])
+print(output_ing)
+
+# db >>> collection >> 그다음단위
+#
