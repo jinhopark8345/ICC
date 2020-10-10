@@ -46,13 +46,30 @@ def make_ing(name, quantity, unit, date):
     }
 
 
-ing_example = make_ing("onion", 600, "g", "2020-10-07 13:34")
-# ing_example = make_ing("apple", 400, "g", "2020-10-07 20:34")
-# icc_db.add_user_ing(ing_example)
+def main_t():
+    # icc_db.get_db().drop_collection("user_ing")
+    print("before")
+    icc_db.find_all_user_ing()
 
-onion_ing = icc_db.find_user_ing("onion")
-print(onion_ing)
+    # ing_example = make_ing("onion2", 500)
+    ing_example = make_ing("apple", 400, "g", "2020-10-07 20:34")
+    # icc_db.add_user_ing(ing_example)
 
-icc_db.update_user_ing(ing_example)
-onion_ing = icc_db.find_user_ing("onion")
-print(onion_ing)
+    # icc_db.delete_user_ing("apple")
+
+    # temp_ing = icc_db.find_user_ing("apple", False)
+    # print(temp_ing)
+
+    temp = icc_db.update_user_ing(ing_example)
+    print(temp)
+    # onion_ing = icc_db.find_user_ing("onion")
+    # temp = icc_db.find_all_user_ing()
+
+    # print out all user_ing
+    print("after")
+    icc_db.find_all_user_ing()
+
+    # print(temp)
+    # print(onion_ing)
+
+main_t()
