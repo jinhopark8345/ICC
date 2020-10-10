@@ -1,0 +1,12 @@
+[
+    {
+        "name": "green onion",
+        "store_method": "fridge",
+        "expiration_duration": 30
+    },
+    {
+        "name": "onion",
+        "store_method": "room",
+        "expiration_duration": 7
+    }
+]
