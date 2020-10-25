@@ -1,5 +1,5 @@
-from icc.iccjson.jconnect import *
-from icc.recommend.compare_recipe import *
+from iccjson.jconnect import *
+from recommend.compare_recipe import *
 
 
 def make_ing(name, quantity, unit):
