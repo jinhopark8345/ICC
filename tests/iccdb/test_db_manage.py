@@ -78,6 +78,23 @@ class Test_Icc_db:
     assert isinstance(rtv, DeleteResult)
     assert None == self.icc_db.ing_info.find_one({"name": "kimchi"})
 
+  def test_add_user_ing(self):
+    # clean up db
+    self.icc_db.db.drop_collection("user_ing")
+
+    # add with icc api
+    test_apple = make_user_ing("apple", 400, "g", "2020-10-07 20:34")
+    test_onion = make_user_ing("onion", 400, "g", "2020-10-07 20:34")
+    self.icc_db.add_user_ing(test_apple)
+    self.icc_db.add_user_ing(test_onion)
+
+    # test with pymongo api
+    db_apple = self.icc_db.user_ing.find_one({"name": "apple"})
+    assert test_apple == db_apple
+
+    db_onion = self.icc_db.user_ing.find_one({"name": "onion"})
+    assert test_onion == db_onion
+
   def test_find_user_ing(self):
     # clean up db
     self.icc_db.db.drop_collection("user_ing")
@@ -92,6 +109,24 @@ class Test_Icc_db:
 
     onion = self.icc_db.find_user_ing("onion")
     assert test_onion == onion
+
+  # def test_find_all_user_ing(self):
+  #   # clean up db
+  #   self.icc_db.db.drop_collection("user_ing")
+
+  #   test_apple = make_user_ing("apple", 400, "g", "2020-10-07 20:34")
+  #   test_onion = make_user_ing("onion", 400, "g", "2020-10-07 20:34")
+  #   self.icc_db.user_ing.insert_one(test_apple)
+  #   self.icc_db.user_ing.insert_one(test_onion)
+
+  #   user_ing = self.icc_db.find_all_user_ing()
+  #   print(type(user_ing))
+
+  #   print(user_ing)
+  #   for ing in user_ing:
+  #     print(ing)
+
+  #   assert False
 
   def test_update_user_ing(self):
     # clean up db
@@ -112,14 +147,42 @@ class Test_Icc_db:
     self.icc_db.update_user_ing(db_apple)
     test_apple2 = make_user_ing("apple", 800, "g", "2020-10-07 20:34")
     find_apple2 = self.icc_db.user_ing.find_one({"name": "apple"},
-                                                      {"_id": False})
+                                                {"_id": False})
     assert test_apple2 == find_apple2
-# apple quantity == 1200
+    # apple quantity == 1200
     self.icc_db.update_user_ing(db_apple)
     test_apple3 = make_user_ing("apple", 1200, "g", "2020-10-07 20:34")
     find_apple3 = self.icc_db.user_ing.find_one({"name": "apple"},
-                                                      {"_id": False})
+                                                {"_id": False})
     assert test_apple3 == find_apple3
 
   def test_delete_user_ing(self):
+    # clean up db
+    self.icc_db.db.drop_collection("user_ing")
+
+    db_apple = make_user_ing("apple", 400, "g", "2020-10-07 20:34")
+    db_onion = make_user_ing("onion", 300, "g", "2020-10-07 20:34")
+    self.icc_db.add_user_ing(db_apple)
+    self.icc_db.add_user_ing(db_onion)
+
+    assert self.icc_db.find_user_ing("apple") == db_apple
+    assert self.icc_db.find_user_ing("onion") == db_onion
+
+    # self.icc_db.print_all_user_ing()
+
+    self.icc_db.delete_user_ing("apple")
+    self.icc_db.delete_user_ing("onion")
+
+    assert self.icc_db.find_user_ing("apple") == None
+    assert self.icc_db.find_user_ing("onion") == None
+
+
+
+  def test_test(self):
     pass
+    # ing = self.icc_db.user_ing.find_one({"name": "onion"})
+    # print(ing)
+
+    # ing = self.icc_db.user_ing.find_one({"name": "onion"}, {"_id": False})
+    # print(ing)
+    # assert False

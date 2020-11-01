@@ -16,7 +16,6 @@ class Icc_db:
     self.recipe = self.db.recipe
     self.ing_info = self.db.ing_info
 
-
   def add_ing_info(self, ing_info):
     """add ing to ing_info if it doesn't exist,
         if so, then update the ing
@@ -52,6 +51,30 @@ class Icc_db:
   def delete_ing_info(self, ing_name):
     return self.ing_info.delete_many({"name": ing_name})
 
+  def add_user_ing(self, user_ing):
+    # check if the format is correct
+    user_info_schema = get_schema("user_ing")
+    if not validateJson(user_ing, user_info_schema):
+      # temporary sol, need to change
+      return -1
+
+    # check if the ingredient exists on db already
+    if self.user_ing.find_one({"name": user_ing["name"]}) == None:
+      return self.user_ing.insert_one(user_ing)
+    else:
+      # ingredient already exist
+      return -2
+
+  def find_user_ing(self, ing_name, returnID=True):
+    if returnID == False:
+      # find_one will find the object and return the object with id(default)
+      ing = self.user_ing.find_one({"name": ing_name}, {"_id": False})
+      return ing
+
+    else:
+      ing = self.user_ing.find_one({"name": ing_name})
+      return ing
+
   def update_user_ing(self, ing):
     """update user_ing quantity if user has the ing,
         if not, then add the whole ing to user_ing
@@ -80,16 +103,14 @@ class Icc_db:
       # ingreident to user_ing
       self.user_ing.insert_one(ing)
 
-  def find_user_ing(self, ing_name, returnID=True):
-    if returnID == False:
-      # ing = self.user_ing.find_one({"name": ing_name}, {"_id": False})
-      ing = self.user_ing.find_one({"name": ing_name})
-      return ing
-    else:
-      ing = self.user_ing.find_one({"name": ing_name})
-      return ing
+  # def find_all_user_ing(self, returnID=True):
+  #   if returnID == False:
+  #     # find_one will find the object and return the object with id(default)
+  #     return self.user_ing.find({},{"_id": False})
+  #   else:
+  #     return self.user_ing.find({})
 
-  def find_all_user_ing(self):
+  def print_all_user_ing(self):
     # user_ing = self.user_ing.find({})
     for ing in self.user_ing.find({}):
       print(ing)
