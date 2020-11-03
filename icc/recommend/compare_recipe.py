@@ -10,9 +10,9 @@ def is_comparable(ask_ing, user_ing):
 
     """
 
-    if (ask_ing["name"] == user_ing["name"]) and (
-        ask_ing["quantity_unit"] == user_ing["quantity_unit"]
-    ):
+    if (ask_ing["name"]
+            == user_ing["name"]) and (ask_ing["quantity_unit"]
+                                      == user_ing["quantity_unit"]):
         return True
 
     return False
@@ -56,11 +56,8 @@ def get_need_ing(ask_ing, user_ings):
     """
 
     need_ing = next(
-        (
-            (get_diff_ing(ask_ing, user_ing))
-            for user_ing in user_ings
-            if is_comparable(user_ing, ask_ing)
-        ),
+        ((get_diff_ing(ask_ing, user_ing))
+         for user_ing in user_ings if is_comparable(user_ing, ask_ing)),
         ask_ing,
     )
 
@@ -79,6 +76,7 @@ def get_need_ings(recipe, user_ings):
 
     """
     need_ings = [
-        get_need_ing(cur_need_ing, user_ings) for cur_need_ing in recipe["ings"]
+        get_need_ing(cur_need_ing, user_ings)
+        for cur_need_ing in recipe["ings"]
     ]
     return need_ings

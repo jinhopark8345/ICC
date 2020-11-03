@@ -76,9 +76,6 @@ def test_get_need_ing():
     assert get_need_ing(ing2, user_ings) == result_ing2
 
 
-
-
-
 def test_get_need_ings():
 
     ing1 = make_ing("onion", 500, "g")
@@ -94,7 +91,6 @@ def test_get_need_ings():
     answer_ing = make_ing("onion", ing1["quantity"] - ing3["quantity"], "g")
     answer_ing2 = ing2
     answer_ings = [answer_ing, answer_ing2]
-
 
     result_ings = get_need_ings(recipe, user_ings)
 
