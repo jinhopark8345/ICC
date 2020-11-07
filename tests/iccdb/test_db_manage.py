@@ -1,5 +1,5 @@
 from iccdb.db_manage import Icc_db
-from iccjson.jconnect import make_ing_info, make_user_ing, make_temp_recipes, make_recipe
+from iccjson.jconnect import make_ing_info, make_user_ing, make_temp_recipes, make_recipe, make_recipe_ing
 
 from pymongo.results import (InsertOneResult, InsertManyResult, UpdateResult,
                              DeleteResult)
@@ -198,14 +198,12 @@ class Test_Icc_db:
         # clean up db
         self.icc_db.db.drop_collection("recipe")
 
-
         recipes = make_temp_recipes()
         rec0 = recipes[0]
         rec1 = recipes[1]
 
         rtv0 = self.icc_db.add_recipe(rec0)
         rtv1 = self.icc_db.add_recipe(rec1)
-
 
         self.icc_db.delete_recipe("rice cake")
         self.icc_db.delete_recipe("curry")
@@ -216,11 +214,91 @@ class Test_Icc_db:
         assert self.icc_db.find_recipe("rice cake") == None
         assert self.icc_db.find_recipe("curry") == None
 
-    def test_test(self):
-        pass
-        # ing = self.icc_db.user_ing.find_one({"name": "onion"})
-        # print(ing)
+    def test_replace_recipe_like(self):
+        # clean up db
+        self.icc_db.db.drop_collection("recipe")
+        recipes = make_temp_recipes()
+        rec0 = recipes[0]
+        rtv0 = self.icc_db.add_recipe(rec0)
 
-        # ing = self.icc_db.user_ing.find_one({"name": "onion"}, {"_id": False})
-        # print(ing)
-        # assert False
+        # case1 : like test
+        rec0["like"] += 7
+        # print("rec0: ", rec0)
+        self.icc_db.replace_recipe_like(rec0)
+        # print("rec0: ", rec0)
+        # print("rec0 db: ", self.icc_db.find_recipe(rec0["name"]))
+        # print("rec0 db: ", self.icc_db.find_recipe(rec0["name"], False))
+        assert self.icc_db.find_recipe(rec0["name"]) == rec0
+
+        # error
+    def test_replace_recipe_ings(self):
+        # clean up db
+        self.icc_db.db.drop_collection("recipe")
+        recipes = make_temp_recipes()
+        rec0 = recipes[0]
+        rtv0 = self.icc_db.add_recipe(rec0)
+
+        # case2: ing
+        # rec0["like"] += 7
+        rec0["ings"][0]['quantity'] += 500
+        self.icc_db.replace_recipe_ings(rec0)
+
+        # print("rec0: ", rec0)
+        # print("rec0 db: ", self.icc_db.find_recipe(rec0["name"]))
+        assert self.icc_db.find_recipe(rec0["name"]) == rec0
+
+    def test_update_recipe_like(self):
+        # clean up db
+        self.icc_db.db.drop_collection("recipe")
+        recipes = make_temp_recipes()
+        rec0 = recipes[0]
+        rtv0 = self.icc_db.add_recipe(rec0)
+
+        # add like 1
+        rec0["like"] += 1
+        self.icc_db.update_recipe_like(rec0["name"])
+
+        # assert self.icc_db.find_recipe(rec0["name"]) == rec0
+        print("rec0: ", rec0)
+        print("db rec0",self.icc_db.find_recipe(rec0["name"]))
+
+
+        # add like 4
+        rec0["like"] += 4
+        self.icc_db.update_recipe_like(rec0["name"], 4)
+        assert self.icc_db.find_recipe(rec0["name"]) == rec0
+
+        # replace like
+        rec0["like"] = 20
+        self.icc_db.update_recipe_like(rec0["name"], 20, True)
+        assert self.icc_db.find_recipe(rec0["name"]) == rec0
+
+    def test_add_recipe_ing(self):
+        pass
+        ### Next SAIDS
+
+        # clean up db
+        # self.icc_db.db.drop_collection("recipe")
+        # recipes = make_temp_recipes()
+        # rec0 = recipes[0]
+        # rtv0 = self.icc_db.add_recipe(rec0)
+
+        # # case2: ing
+        # # rec0["like"] += 7
+        # rec0["ings"][0]['quantity'] += 500
+        # self.icc_db.replace_recipe_ings(rec0)
+        # db_watermelon = make_recipe_ing("wm", 700, 'g')
+        # db_onion = make_recipe_ing("onion", "fridge", 7 * 60 * 24)
+        # db_apple = make_recipe_ing("apple", "fridge", 3600)
+
+        # # print("rec0: ", rec0)
+        # # print("rec0 db: ", self.icc_db.find_recipe(rec0["name"]))
+        # assert self.icc_db.find_recipe(rec0["name"]) == rec0
+
+
+    def test_delete_recipe_ing(self):
+        pass
+
+    def test_update_recipe_ing_quantity(self):
+        pass
+

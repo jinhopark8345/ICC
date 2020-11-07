@@ -1,6 +1,5 @@
 import pymongo
 import datetime
-import pprint
 
 from pymongo import MongoClient
 from pymongo import ReturnDocument
@@ -39,12 +38,6 @@ class Icc_db:
             # ingredient already exist
             return -2
 
-    def find_ing_info(self, ing_name):
-        ing = self.ing_info.find_one({"name": ing_name})
-
-        # return None if ing doesn't exist on DB
-        return ing
-
     def update_ing_info(self, ing):
         pass
 
@@ -64,16 +57,6 @@ class Icc_db:
         else:
             # ingredient already exist
             return -2
-
-    def find_user_ing(self, ing_name, returnID=True):
-        if returnID == False:
-            # find_one will find the object and return the object with id(default)
-            ing = self.user_ing.find_one({"name": ing_name}, {"_id": False})
-            return ing
-
-        else:
-            ing = self.user_ing.find_one({"name": ing_name})
-            return ing
 
     def update_user_ing(self, ing):
         """update user_ing quantity if user has the ing,
@@ -144,17 +127,7 @@ class Icc_db:
     def delete_recipe(self, recipe_name):
         return self.recipe.delete_many({"name": recipe_name})
 
-    def find_recipe(self, recipe_name, returnID=False):
-        if returnID == False:
-            # find_one will find the object and return the object with id(default)
-            recipe = self.recipe.find_one({"name": recipe_name},
-                                          {"_id": False})
-            return recipe
-        else:
-            recipe = self.recipe.find_one({"name": recipe_name})
-            return recipe
-
-    def update_recipe(self, recipe):
+    def replace_recipe_ings(self, recipe):
         """
         1. update like
         2. update ings
@@ -162,17 +135,25 @@ class Icc_db:
             2. delete ing
             3. update ing - update quantity
         """
-        # like
-        self.recipe.find_one_and_update(
-            {"name": recipe["name"]},
-            {"$inc": {
-                "like": recipe["like"]
-            }},
-            {"$set": {
-                "ings": recipe["ings"]
-            }},
-            upsert=False,
-        )
+        return self.recipe.find_one_and_update({"name": recipe["name"]},
+                                        {"$set": {
+                                            "ings": recipe["ings"]
+                                        }},
+                                        upsert=False)
+
+    def replace_recipe_like(self, recipe):
+        """
+        1. update like
+        2. update ings
+            1. add ing
+            2. delete ing
+            3. update ing - update quantity
+        """
+        return self.recipe.find_one_and_update({"name": recipe["name"]},
+                                        {"$set": {
+                                            "like": recipe["like"]
+                                        }},
+                                        upsert=False)
 
     def update_recipe_like(self, recipe_name, like=1, replace_flag=False):
 
@@ -185,20 +166,70 @@ class Icc_db:
         else:
             recipe["like"] = like
 
-        self.update_recipe(recipe)
+        self.replace_recipe_like(recipe)
 
-    def update_recipe_add_ing(self, recipe_name, ing):
+    def add_recipe_ing(self, recipe_name, ing):
         # 2. update ings - add ing
         recipe = self.find_recipe(recipe_name)
+
+        ### Next SAIDS: need to add schema test
         recipe['ings'].append(ing)
 
-        self.update_recipe(recipe)
+        self.replace_recipe_ing(recipe)
 
-
-    def update_recipe_delete_ing(self, recipe_name, ing):
+    def delete_recipe_ing(self, recipe_name, ing_name):
         # 2. update ings - delete ing
+        recipe = self.find_recipe(recipe_name)
+        recipe['ings'] = [
+            ing for ing in recipe['ings'] if ing["name"] != ing_name
+        ]
 
-        pass
-    def update_recipe_update_ing_quantity(self, recipe_name, ing):
+        self.replace_recipe_ings(recipe)
+
+    def update_recipe_ing_quantity(self, recipe_name, ing, replace_flag=False):
         # 2. update ing - update quantity
-        pass
+
+        ### Next SAIDS: need to add schema test
+
+        recipe = self.find_recipe(recipe_name)
+        for db_ing in recipe['ings']:
+            if db_ing["name"] == ing["name"]:
+                if not replace_flag:
+                    db_ing["quantity"] += ing["quantity"]
+                else:
+                    db_ing["quantity"] = ing["quantity"]
+
+        self.replace_recipe_ings(recipe)
+
+        ############################################
+        ############################################
+        ############################################
+        ############################################
+        ############################################
+        ############################################
+
+    def find_ing_info(self, ing_name):
+        ing = self.ing_info.find_one({"name": ing_name})
+
+        # return None if ing doesn't exist on DB
+        return ing
+
+    def find_user_ing(self, ing_name, returnID=True):
+        if returnID == False:
+            # find_one will find the object and return the object with id(default)
+            ing = self.user_ing.find_one({"name": ing_name}, {"_id": False})
+            return ing
+
+        else:
+            ing = self.user_ing.find_one({"name": ing_name})
+            return ing
+
+    def find_recipe(self, recipe_name, returnID=True):
+        if returnID == False:
+            # find_one will find the object and return the object with id(default)
+            recipe = self.recipe.find_one({"name": recipe_name},
+                                          {"_id": False})
+            return recipe
+        else:
+            recipe = self.recipe.find_one({"name": recipe_name})
+            return recipe

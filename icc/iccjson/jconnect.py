@@ -78,6 +78,12 @@ def make_user_ing(name, quantity, unit, date):
         "store_time": date,
     }
 
+def make_recipe_ing(name, quantity, unit):
+    return {
+        "name": name,
+        "quantity": quantity,
+        "quantity_unit": unit
+    }
 
 def make_ing_info(name, store_method, exp_dur):
     return {
