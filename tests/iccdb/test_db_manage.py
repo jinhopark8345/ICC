@@ -260,8 +260,7 @@ class Test_Icc_db:
 
         # assert self.icc_db.find_recipe(rec0["name"]) == rec0
         print("rec0: ", rec0)
-        print("db rec0",self.icc_db.find_recipe(rec0["name"]))
-
+        print("db rec0", self.icc_db.find_recipe(rec0["name"]))
 
         # add like 4
         rec0["like"] += 4
@@ -274,31 +273,68 @@ class Test_Icc_db:
         assert self.icc_db.find_recipe(rec0["name"]) == rec0
 
     def test_add_recipe_ing(self):
-        pass
-        ### Next SAIDS
-
         # clean up db
-        # self.icc_db.db.drop_collection("recipe")
-        # recipes = make_temp_recipes()
-        # rec0 = recipes[0]
-        # rtv0 = self.icc_db.add_recipe(rec0)
+        self.icc_db.db.drop_collection("recipe")
+        recipes = make_temp_recipes()
+        rec0 = recipes[0]
+        rtv0 = self.icc_db.add_recipe(rec0)
 
-        # # case2: ing
-        # # rec0["like"] += 7
-        # rec0["ings"][0]['quantity'] += 500
-        # self.icc_db.replace_recipe_ings(rec0)
-        # db_watermelon = make_recipe_ing("wm", 700, 'g')
-        # db_onion = make_recipe_ing("onion", "fridge", 7 * 60 * 24)
-        # db_apple = make_recipe_ing("apple", "fridge", 3600)
+        # print(rec0)
 
-        # # print("rec0: ", rec0)
-        # # print("rec0 db: ", self.icc_db.find_recipe(rec0["name"]))
-        # assert self.icc_db.find_recipe(rec0["name"]) == rec0
+        db_watermelon = make_recipe_ing("wm", 700, 'g')
+        db_onion = make_recipe_ing("onion", 7 * 60 * 24, "g")
+        db_apple = make_recipe_ing("apple", 3600, "kg")
 
+        self.icc_db.add_recipe_ing(rec0["name"], db_apple)
+
+        assert self.icc_db.find_recipe_ing(rec0["name"], "apple") == db_apple
 
     def test_delete_recipe_ing(self):
-        pass
+        # clean up db
+        self.icc_db.db.drop_collection("recipe")
+        recipes = make_temp_recipes()
+        rec0 = recipes[0]
+        rtv0 = self.icc_db.add_recipe(rec0)
 
-    def test_update_recipe_ing_quantity(self):
-        pass
+        db_watermelon = make_recipe_ing("wm", 700, 'g')
+        db_onion = make_recipe_ing("onion", 7 * 60 * 24, "g")
+        db_apple = make_recipe_ing("apple", 3600, "kg")
 
+        self.icc_db.add_recipe_ing(rec0["name"], db_apple)
+        self.icc_db.delete_recipe_ing(rec0["name"], "apple")
+
+        assert self.icc_db.find_recipe_ing(rec0["name"], "onion") == None
+
+    def test_update_recipe_ing(self):
+        # clean up db
+        self.icc_db.db.drop_collection("recipe")
+        recipes = make_temp_recipes()
+        rec0 = recipes[0]
+        rtv0 = self.icc_db.add_recipe(rec0)
+
+        db_watermelon = make_recipe_ing("wm", 700, 'g')
+        db_onion = make_recipe_ing("onion", 7 * 60 * 24, "g")
+        db_apple = make_recipe_ing("apple", 3600, "kg")
+
+        self.icc_db.add_recipe_ing(rec0["name"], db_onion)
+
+        # case1: replace
+        db_onion2 = make_recipe_ing("onion", 5000, "g")
+        self.icc_db.update_recipe_ing(rec0["name"],
+                                      db_onion2,
+                                      replace_flag=True)
+        # print(self.icc_db.find_recipe_ing(rec0["name"], "onion"))
+        # print(db_onion2)
+        assert self.icc_db.find_recipe_ing(rec0["name"], "onion") == db_onion2
+
+        # case2: update
+        db_onion3 = make_recipe_ing("onion", 3, "g")
+        db_onion2["quantity"] += db_onion3["quantity"]
+
+        self.icc_db.update_recipe_ing(rec0["name"],
+                                      db_onion3,
+                                      replace_flag=False)
+        # print(self.icc_db.find_recipe_ing(rec0["name"], "onion"))
+        # print(db_onion2)
+
+        assert self.icc_db.find_recipe_ing(rec0["name"], "onion") == db_onion2

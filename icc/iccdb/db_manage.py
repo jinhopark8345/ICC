@@ -101,6 +101,26 @@ class Icc_db:
     def delete_user_ing(self, ing_name):
         self.user_ing.delete_one({"name": ing_name})
 
+    """
+    recipe manipulation methods
+
+    1. add recipe:
+        - add_recipe
+    2. delete recipe:
+        - delete_recipe
+    3. recipe modification ( recipe has 'ings' and 'like')
+        - replace_recipe_ings
+        - replace_recipe_like
+
+        // like
+        - update_recipe_like: last function / using replace_recipe_ings
+
+        // ing(s)
+        - add_recipe_ing : add ing to recipe / using replace_recipe_ings
+        - delete_recipe_ing : delete ing from recipe/ using replace_recipe_ings
+        - update_recipe_ing: / using replace_recipe_ings
+    """
+
     def add_recipe(self, recipe):
         """add recipe to db.recipe if it doesn't exist,
         if so, then update the recipe
@@ -128,13 +148,6 @@ class Icc_db:
         return self.recipe.delete_many({"name": recipe_name})
 
     def replace_recipe_ings(self, recipe):
-        """
-        1. update like
-        2. update ings
-            1. add ing
-            2. delete ing
-            3. update ing - update quantity
-        """
         return self.recipe.find_one_and_update({"name": recipe["name"]},
                                         {"$set": {
                                             "ings": recipe["ings"]
@@ -142,13 +155,6 @@ class Icc_db:
                                         upsert=False)
 
     def replace_recipe_like(self, recipe):
-        """
-        1. update like
-        2. update ings
-            1. add ing
-            2. delete ing
-            3. update ing - update quantity
-        """
         return self.recipe.find_one_and_update({"name": recipe["name"]},
                                         {"$set": {
                                             "like": recipe["like"]
@@ -169,13 +175,13 @@ class Icc_db:
         self.replace_recipe_like(recipe)
 
     def add_recipe_ing(self, recipe_name, ing):
-        # 2. update ings - add ing
+        # need to check recipe ing schema
         recipe = self.find_recipe(recipe_name)
 
         ### Next SAIDS: need to add schema test
         recipe['ings'].append(ing)
 
-        self.replace_recipe_ing(recipe)
+        self.replace_recipe_ings(recipe)
 
     def delete_recipe_ing(self, recipe_name, ing_name):
         # 2. update ings - delete ing
@@ -186,10 +192,9 @@ class Icc_db:
 
         self.replace_recipe_ings(recipe)
 
-    def update_recipe_ing_quantity(self, recipe_name, ing, replace_flag=False):
-        # 2. update ing - update quantity
-
-        ### Next SAIDS: need to add schema test
+    def update_recipe_ing(self, recipe_name, ing, replace_flag=False):
+        "update/replace recipe ing quantity"
+        # need to check recipe ing schema
 
         recipe = self.find_recipe(recipe_name)
         for db_ing in recipe['ings']:
@@ -201,12 +206,6 @@ class Icc_db:
 
         self.replace_recipe_ings(recipe)
 
-        ############################################
-        ############################################
-        ############################################
-        ############################################
-        ############################################
-        ############################################
 
     def find_ing_info(self, ing_name):
         ing = self.ing_info.find_one({"name": ing_name})
@@ -233,3 +232,23 @@ class Icc_db:
         else:
             recipe = self.recipe.find_one({"name": recipe_name})
             return recipe
+
+    def find_recipe_ing(self, recipe_name, ing_name, returnID=True):
+        if returnID == False:
+            # find_one will find the object and return the object with id(default)
+            recipe = self.recipe.find_one({"name": recipe_name},
+                                          {"_id": False})
+            for ing in recipe["ings"]:
+                if ing["name"] == ing_name:
+                    return ing
+        else:
+            recipe = self.recipe.find_one({"name": recipe_name})
+            for ing in recipe["ings"]:
+                if ing["name"] == ing_name:
+                    return ing
+
+
+    """
+    recipe recommendation
+
+    """
