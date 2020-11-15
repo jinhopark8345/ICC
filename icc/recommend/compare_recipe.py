@@ -1,3 +1,9 @@
+import datetime as dt
+from pytz import timezone, utc
+from iccdb.db_manage import *
+from iccjson.jconnect import *
+
+
 def is_comparable(ask_ing, user_ing):
     """tell if the ingredients are comparable
 
@@ -30,11 +36,14 @@ def get_diff_ing(ask_ing, user_ing):
 
     """
     if is_comparable(ask_ing, user_ing):
-        return {
-            "name": ask_ing["name"],
-            "quantity": ask_ing["quantity"] - user_ing["quantity"],
-            "quantity_unit": ask_ing["quantity_unit"],
-        }
+        diff_quantity = ask_ing["quantity"] - user_ing["quantity"]
+        user_ing["quantity"] = diff_quantity
+        return user_ing
+        # return {
+        #     "name": ask_ing["name"],
+        #     "quantity": ask_ing["quantity"] - user_ing["quantity"],
+        #     "quantity_unit": ask_ing["quantity_unit"],
+        # }
     else:
         print("wrong use case")
 
@@ -75,8 +84,16 @@ def get_need_ings(recipe, user_ings):
         ingredients that user need to make the recipe
 
     """
-    need_ings = [
+    need_user_ings = [
         get_need_ing(cur_need_ing, user_ings)
         for cur_need_ing in recipe["ings"]
     ]
-    return need_ings
+
+    need_user_ings = [ing for ing in need_user_ings if ing["quantity"] > 0]
+    return need_user_ings
+
+
+# def get_need_ings2(recipe_name):
+
+
+

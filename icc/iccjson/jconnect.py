@@ -78,12 +78,10 @@ def make_user_ing(name, quantity, unit, date):
         "store_time": date,
     }
 
+
 def make_recipe_ing(name, quantity, unit):
-    return {
-        "name": name,
-        "quantity": quantity,
-        "quantity_unit": unit
-    }
+    return {"name": name, "quantity": quantity, "quantity_unit": unit}
+
 
 def make_ing_info(name, store_method, exp_dur):
     return {
@@ -97,10 +95,113 @@ def make_recipe(name, like, ings):
     return {"name": name, "like": like, "ings": ings}
 
 
-def make_temp_recipes():
+def make_temp_ing_info():
+    return [{
+        "name": "green onion",
+        "store_method": "fridge",
+        "expiration_duration": 60 * 24
+    }, {
+        "name": "onion",
+        "store_method": "room",
+        "expiration_duration": 60 * 24 * 14
+    }, {
+        "name": "pepper",
+        "store_method": "fridge",
+        "expiration_duration": 60 * 24 * 365
+    }, {
+        "name": "red pepper",
+        "store_method": "fridge",
+        "expiration_duration": 60 * 24 * 14
+    }, {
+        "name": "kimchi",
+        "store_method": "fridge",
+        "expiration_duration": 60 * 24 * 60
+    }, {
+        "name": "egg",
+        "store_method": "fridge",
+        "expiration_duration": 60 * 24 * 40
+    }, {
+        "name": "rice cake",
+        "store_method": "fridge",
+        "expiration_duration": 60 * 24 * 30
+    }, {
+        "name": "garlic",
+        "store_method": "fridge",
+        "expiration_duration": 60 * 24 * 30
+    }, {
+        "name": "water",
+        "store_method": "room",
+        "expiration_duration": 60 * 24 * 30
+    }, {
+        "name": "beef",
+        "store_method": "fridge",
+        "expiration_duration": 60 * 24 * 10
+    }]
+
+
+def make_temp_user_ing():
+    return [{
+        "name": "green onion",
+        "quantity": 100,
+        "quantity_unit": "g",
+        "store_time": "2020-09-27 11:43"
+    }, {
+        "name": "pepper",
+        "quantity": 200,
+        "quantity_unit": "g",
+        "store_time": "2020-09-28 15:33"
+    }, {
+        "name": "onion",
+        "quantity": 1000,
+        "quantity_unit": "g",
+        "store_time": "2020-09-28 15:33"
+    }, {
+        "name": "kimchi",
+        "quantity": 400,
+        "quantity_unit": "g",
+        "store_time": "2020-09-28 15:33"
+    }, {
+        "name": "egg",
+        "quantity": 500,
+        "quantity_unit": "g",
+        "store_time": "2020-09-28 15:33"
+    }, {
+        "name": "rice cake",
+        "quantity": 500,
+        "quantity_unit": "g",
+        "store_time": "2020-09-28 15:33"
+    }, {
+        "name": "garlic",
+        "quantity": 100,
+        "quantity_unit": "g",
+        "store_time": "2020-09-28 15:33"
+    }, {
+        "name": "beef",
+        "quantity": 400,
+        "quantity_unit": "g",
+        "store_time": "2020-09-28 15:33"
+    }, {
+        "name": "red pepper",
+        "quantity": 1000,
+        "quantity_unit": "g",
+        "store_time": "2020-09-28 15:33"
+    },{
+        "name": "carrot",
+        "quantity": 600,
+        "quantity_unit": "g",
+        "store_time": "2020-09-28 15:33"
+    },{
+        "name": "potato",
+        "quantity": 1000,
+        "quantity_unit": "g",
+        "store_time": "2020-09-28 15:33"
+    }]
+
+
+def make_temp_recipe():
     return [{
         "name":
-        "rice cake",
+        "떡국",
         "like":
         7,
         "ings": [{
@@ -110,23 +211,19 @@ def make_temp_recipes():
         }, {
             "name": "pepper",
             "quantity": 700,
-            "quantity_unit": "kg"
+            "quantity_unit": "g"
         }, {
             "name": "water",
             "quantity": 500,
             "quantity_unit": "ml"
         }, {
-            "name": "water2",
-            "quantity": 500,
-            "quantity_unit": "ml"
+            "name": "rice cake",
+            "quantity": 200,
+            "quantity_unit": "g"
         }, {
-            "name": "water3",
-            "quantity": 477,
-            "quantity_unit": "ml"
-        }, {
-            "name": "kimchi",
-            "quantity": 359,
-            "quantity_unit": "kg"
+            "name": "egg",
+            "quantity": 100,
+            "quantity_unit": "g"
         }]
     }, {
         "name":
@@ -135,15 +232,79 @@ def make_temp_recipes():
         5,
         "ings": [{
             "name": "red pepper",
-            "quantity": 500,
-            "quantity_unit": "kg"
+            "quantity": 20,
+            "quantity_unit": "g"
         }, {
             "name": "onion",
-            "quantity": 700,
-            "quantity_unit": "kg"
+            "quantity": 200,
+            "quantity_unit": "g"
+        }, {
+            "name": "potato",
+            "quantity": 300,
+            "quantity_unit": "g"
+        },{
+            "name": "carrot",
+            "quantity": 150,
+            "quantity_unit": "g"
+        }]
+    }, {
+        "name":
+        "kimchi stew",
+        "like":
+        4,
+        "ings": [{
+            "name": "red pepper",
+            "quantity": 20,
+            "quantity_unit": "g"
+        }, {
+            "name": "onion",
+            "quantity": 200,
+            "quantity_unit": "g"
         }, {
             "name": "kimchi",
             "quantity": 20,
-            "quantity_unit": "kg"
+            "quantity_unit": "g"
+        }, {
+            "name": "sugar",
+            "quantity": 20,
+            "quantity_unit": "g"
+        }, {
+            "name": "soup soy sauce",
+            "quantity": 20,
+            "quantity_unit": "g"
+        }, {
+            "name": "pork",
+            "quantity": 150,
+            "quantity_unit": "g"
+        }]
+    }, {
+        "name":
+        "Doenjang-jjigae",
+        "like":
+        9,
+        "ings": [{
+            "name": "red pepper",
+            "quantity": 20,
+            "quantity_unit": "g"
+        }, {
+            "name": "onion",
+            "quantity": 200,
+            "quantity_unit": "g"
+        }, {
+            "name": "sugar",
+            "quantity": 10,
+            "quantity_unit": "g"
+        }, {
+            "name": "beef",
+            "quantity": 50,
+            "quantity_unit": "g"
+        }, {
+            "name": "Doenjang",
+            "quantity": 40,
+            "quantity_unit": "g"
+        }, {
+            "name": "water",
+            "quantity": 300,
+            "quantity_unit": "ml"
         }]
     }]

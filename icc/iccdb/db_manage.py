@@ -4,7 +4,8 @@ import datetime
 from pymongo import MongoClient
 from pymongo import ReturnDocument
 
-from iccjson.jconnect import get_schema, validateJson
+from iccjson.jconnect import *
+# from recommend.compare_recipe import get_need_ings
 
 
 class Icc_db:
@@ -58,6 +59,17 @@ class Icc_db:
             # ingredient already exist
             return -2
 
+    def add_temp_user_ing(self):
+        # clean db
+        self.db.drop_collection("user_ing")
+        user_ings = make_temp_user_ing()
+
+        for user_ing in user_ings:
+            # print(recipe)
+            rtv = self.add_user_ing(user_ing)
+            if rtv == -1 or rtv == -2:
+                print("add_recipe error code : {}".format(rtv))
+
     def update_user_ing(self, ing):
         """update user_ing quantity if user has the ing,
         if not, then add the whole ing to user_ing
@@ -93,7 +105,7 @@ class Icc_db:
     #   else:
     #     return self.user_ing.find({})
 
-    def print_all_user_ing(self):
+    def print_user_ing(self):
         # user_ing = self.user_ing.find({})
         for ing in self.user_ing.find({}):
             print(ing)
@@ -148,18 +160,18 @@ class Icc_db:
         return self.recipe.delete_many({"name": recipe_name})
 
     def replace_recipe_ings(self, recipe):
-        return self.recipe.find_one_and_update({"name": recipe["name"]},
-                                        {"$set": {
-                                            "ings": recipe["ings"]
-                                        }},
-                                        upsert=False)
+        return self.recipe.find_one_and_update(
+            {"name": recipe["name"]}, {"$set": {
+                "ings": recipe["ings"]
+            }},
+            upsert=False)
 
     def replace_recipe_like(self, recipe):
-        return self.recipe.find_one_and_update({"name": recipe["name"]},
-                                        {"$set": {
-                                            "like": recipe["like"]
-                                        }},
-                                        upsert=False)
+        return self.recipe.find_one_and_update(
+            {"name": recipe["name"]}, {"$set": {
+                "like": recipe["like"]
+            }},
+            upsert=False)
 
     def update_recipe_like(self, recipe_name, like=1, replace_flag=False):
 
@@ -206,7 +218,6 @@ class Icc_db:
 
         self.replace_recipe_ings(recipe)
 
-
     def find_ing_info(self, ing_name):
         ing = self.ing_info.find_one({"name": ing_name})
 
@@ -233,6 +244,19 @@ class Icc_db:
             recipe = self.recipe.find_one({"name": recipe_name})
             return recipe
 
+    def find_recipes(self, returnID=True):
+        cursor = self.recipe  # choosing the collection you need
+        recipes = []
+
+        if returnID == False:
+            for recipe in cursor.find({}, {"_id": False}):
+                recipes.append(recipe)
+        else:
+            for recipe in cursor.find({}):
+                recipes.append(recipe)
+
+        return recipes
+
     def find_recipe_ing(self, recipe_name, ing_name, returnID=True):
         if returnID == False:
             # find_one will find the object and return the object with id(default)
@@ -247,8 +271,43 @@ class Icc_db:
                 if ing["name"] == ing_name:
                     return ing
 
+    def find_user_ings(self, returnID=True):
+        user_ings = []
+        if returnID == False:
+            for user_ing in self.user_ing.find({}, {"_id": False}):
+                user_ings.append(user_ing)
+        else:
+            for user_ing in self.user_ing.find({}):
+                user_ings.append(user_ing)
+        return user_ings
 
-    """
-    recipe recommendation
+    def find_ing_infos(self, returnID=False):
+        ing_infos = []
+        if returnID == False:
+            for ing_info in self.ing_info.find({}, {"_id": False}):
+                ing_infos.append(ing_info)
+        else:
+            for ing_info in self.ing_info.find({}):
+                ing_infos.append(ing_info)
+        return ing_infos
 
-    """
+    def add_temp_recipe(self):
+        self.db.drop_collection("recipe")
+        recipes = make_temp_recipe()
+        for recipe in recipes:
+            # print(recipe)
+            temp = self.add_recipe(recipe)
+            if temp == -1 or temp == -2:
+                print("add_recipe error code : {}", temp)
+
+    def add_temp_ing_info(self):
+        # clean db
+        self.db.drop_collection("ing_info")
+        ing_infos = make_temp_ing_info()
+
+        for ing_info in ing_infos:
+            # print(recipe)
+            rtv = self.add_ing_info(ing_info)
+            if rtv == -1 or rtv == -2:
+                print("add_recipe error code : {}".format(rtv))
+

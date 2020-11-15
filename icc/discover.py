@@ -8,6 +8,9 @@ def discover():
         os.path.join(os.path.dirname(__file__), "..", "icc"))
     sys.path.append(libdir)
 
+    # import sys
+    # print(sys.path)
+
 
 def utility(name):
     current_path = os.path.dirname(os.path.abspath(__file__))

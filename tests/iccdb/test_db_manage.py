@@ -1,5 +1,5 @@
 from iccdb.db_manage import Icc_db
-from iccjson.jconnect import make_ing_info, make_user_ing, make_temp_recipes, make_recipe, make_recipe_ing
+from iccjson.jconnect import make_ing_info, make_user_ing, make_temp_recipe, make_recipe, make_recipe_ing
 
 from pymongo.results import (InsertOneResult, InsertManyResult, UpdateResult,
                              DeleteResult)
@@ -180,7 +180,7 @@ class Test_Icc_db:
         # clean up db
         self.icc_db.db.drop_collection("recipe")
 
-        recipes = make_temp_recipes()
+        recipes = make_temp_recipe()
         rec0 = recipes[0]
         rec1 = recipes[1]
 
@@ -189,7 +189,7 @@ class Test_Icc_db:
         # print("rtv0: ", rtv0)
         # print("rtv1: ", rtv1)
 
-        rice_cake = self.icc_db.recipe.find_one({"name": "rice cake"})
+        rice_cake = self.icc_db.recipe.find_one({"name": "떡국"})
         curry = self.icc_db.recipe.find_one({"name": "curry"})
         assert rec0 == rice_cake
         assert rec1 == curry
@@ -198,7 +198,7 @@ class Test_Icc_db:
         # clean up db
         self.icc_db.db.drop_collection("recipe")
 
-        recipes = make_temp_recipes()
+        recipes = make_temp_recipe()
         rec0 = recipes[0]
         rec1 = recipes[1]
 
@@ -217,7 +217,7 @@ class Test_Icc_db:
     def test_replace_recipe_like(self):
         # clean up db
         self.icc_db.db.drop_collection("recipe")
-        recipes = make_temp_recipes()
+        recipes = make_temp_recipe()
         rec0 = recipes[0]
         rtv0 = self.icc_db.add_recipe(rec0)
 
@@ -234,7 +234,7 @@ class Test_Icc_db:
     def test_replace_recipe_ings(self):
         # clean up db
         self.icc_db.db.drop_collection("recipe")
-        recipes = make_temp_recipes()
+        recipes = make_temp_recipe()
         rec0 = recipes[0]
         rtv0 = self.icc_db.add_recipe(rec0)
 
@@ -250,7 +250,7 @@ class Test_Icc_db:
     def test_update_recipe_like(self):
         # clean up db
         self.icc_db.db.drop_collection("recipe")
-        recipes = make_temp_recipes()
+        recipes = make_temp_recipe()
         rec0 = recipes[0]
         rtv0 = self.icc_db.add_recipe(rec0)
 
@@ -275,7 +275,7 @@ class Test_Icc_db:
     def test_add_recipe_ing(self):
         # clean up db
         self.icc_db.db.drop_collection("recipe")
-        recipes = make_temp_recipes()
+        recipes = make_temp_recipe()
         rec0 = recipes[0]
         rtv0 = self.icc_db.add_recipe(rec0)
 
@@ -292,7 +292,7 @@ class Test_Icc_db:
     def test_delete_recipe_ing(self):
         # clean up db
         self.icc_db.db.drop_collection("recipe")
-        recipes = make_temp_recipes()
+        recipes = make_temp_recipe()
         rec0 = recipes[0]
         rtv0 = self.icc_db.add_recipe(rec0)
 
@@ -308,7 +308,7 @@ class Test_Icc_db:
     def test_update_recipe_ing(self):
         # clean up db
         self.icc_db.db.drop_collection("recipe")
-        recipes = make_temp_recipes()
+        recipes = make_temp_recipe()
         rec0 = recipes[0]
         rtv0 = self.icc_db.add_recipe(rec0)
 
