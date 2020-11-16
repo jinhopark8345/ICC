@@ -200,6 +200,10 @@ def make_temp_ing_info():
         "name": "starch syrup",
         "store_method": "room",
         "expiration_duration": 60 * 24 * 500
+    },{
+        "name": "cooking oil",
+        "store_method": "room",
+        "expiration_duration": 60 * 24 * 500
     }]
 
 
@@ -276,7 +280,7 @@ def make_temp_user_ing():
 def make_temp_recipe():
     return [{
         "name":
-        "떡국",
+        "rice cake soup",
         "like":
         7,
         "ings": [{
@@ -354,7 +358,7 @@ def make_temp_recipe():
         }]
     }, {
         "name":
-        "Doenjang-jjigae",
+        "doenjang-jjigae",
         "like":
         9,
         "ings": [{
@@ -380,6 +384,134 @@ def make_temp_recipe():
         }, {
             "name": "water",
             "quantity": 300,
+            "quantity_unit": "ml"
+        }]
+    }, {
+        "name":
+        "grilled mackerel",
+        "like":
+        7,
+        "ings": [{
+            "name": "mackerel",
+            "quantity": 220,
+            "quantity_unit": "g"
+        }, {
+            "name": "soy sauce",
+            "quantity": 10,
+            "quantity_unit": "g"
+        }, {
+            "name": "onion",
+            "quantity": 10,
+            "quantity_unit": "g"
+        }, {
+            "name": "garlic",
+            "quantity": 3,
+            "quantity_unit": "g"
+        }, {
+            "name": "sugar",
+            "quantity": 4,
+            "quantity_unit": "g"
+        }, {
+            "name": "sesame oil",
+            "quantity": 3,
+            "quantity_unit": "ml"
+        }, {
+            "name": "pepper",
+            "quantity": 0.5,
+            "quantity_unit": "g"
+        }, {
+            "name": "salt",
+            "quantity": 3,
+            "quantity_unit": "g"
+        }]
+    }, {
+        "name":
+        "beef bulgogi",
+        "like":
+        10,
+        "ings": [{
+            "name": "beef",
+            "quantity": 170,
+            "quantity_unit": "g"
+        }, {
+            "name": "green onion",
+            "quantity": 45,
+            "quantity_unit": "g"
+        }, {
+            "name": "onion",
+            "quantity": 12,
+            "quantity_unit": "g"
+        }, {
+            "name": "shiitake mushroom",
+            "quantity": 6,
+            "quantity_unit": "g"
+        }, {
+            "name": "carrot",
+            "quantity": 5,
+            "quantity_unit": "g"
+        }]
+    }, {
+        "name":
+        "roast duck",
+        "like":
+        9,
+        "ings": [{
+            "name": "duck meat",
+            "quantity": 220,
+            "quantity_unit": "g"
+        }, {
+            "name": "salt",
+            "quantity": 3,
+            "quantity_unit": "g"
+        }, {
+            "name": "pepper",
+            "quantity": 1,
+            "quantity_unit": "g"
+        }, {
+            "name": "olive oil",
+            "quantity": 3,
+            "quantity_unit": "g"
+        }, {
+            "name": "Doenjang",
+            "quantity": 40,
+            "quantity_unit": "g"
+        }, {
+            "name": "water",
+            "quantity": 300,
+            "quantity_unit": "ml"
+        }]
+    }, {
+        "name":
+        "chicken teriyaki",
+        "like":
+        5,
+        "ings": [{
+            "name": "chicken meat",
+            "quantity": 200,
+            "quantity_unit": "g"
+        }, {
+            "name": "rice cake",
+            "quantity": 42,
+            "quantity_unit": "g"
+        }, {
+            "name": "potato",
+            "quantity": 33,
+            "quantity_unit": "g"
+        }, {
+            "name": "carrot",
+            "quantity": 33,
+            "quantity_unit": "g"
+        }, {
+            "name": "onion",
+            "quantity": 5,
+            "quantity_unit": "g"
+        }, {
+            "name": "green onion",
+            "quantity": 5,
+            "quantity_unit": "g"
+        }, {
+            "name": "cooking oil",
+            "quantity": 3,
             "quantity_unit": "ml"
         }]
     }]
