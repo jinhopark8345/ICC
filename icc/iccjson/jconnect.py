@@ -99,31 +99,31 @@ def make_temp_ing_info():
     return [{
         "name": "green onion",
         "store_method": "fridge",
-        "expiration_duration": 60 * 24
+        "expiration_duration": 60 * 24    
     }, {
         "name": "onion",
         "store_method": "room",
-        "expiration_duration": 60 * 24 * 14
+        "expiration_duration": 60 * 24 * 14    
     }, {
         "name": "pepper",
         "store_method": "fridge",
-        "expiration_duration": 60 * 24 * 365
+        "expiration_duration": 60 * 24 * 365    
     }, {
         "name": "red pepper",
         "store_method": "fridge",
-        "expiration_duration": 60 * 24 * 14
+        "expiration_duration": 60 * 24 * 14    
     }, {
         "name": "kimchi",
         "store_method": "fridge",
-        "expiration_duration": 60 * 24 * 60
+        "expiration_duration": 60 * 24 * 60    
     }, {
         "name": "egg",
         "store_method": "fridge",
-        "expiration_duration": 60 * 24 * 40
+        "expiration_duration": 60 * 24 * 40    
     }, {
         "name": "rice cake",
         "store_method": "fridge",
-        "expiration_duration": 60 * 24 * 30
+        "expiration_duration": 60 * 24 * 30    
     }, {
         "name": "garlic",
         "store_method": "fridge",
@@ -136,7 +136,72 @@ def make_temp_ing_info():
         "name": "beef",
         "store_method": "fridge",
         "expiration_duration": 60 * 24 * 10
+    }, {
+        "name": "mackerel",
+        "store_method": "fridge",
+        "expiration_duration": 60 * 24 * 5
+    },{
+        "name": "soy sauce",
+        "store_method": "room",
+        "expiration_duration": 60 * 24 * 100
+    },{
+        "name": "sugar",
+        "store_method": "room",
+        "expiration_duration": 60 * 24 * 100
+    },{
+        "name": "ground pepper",
+        "store_method": "room",
+        "expiration_duration": 60 * 24 * 100
+    },{
+        "name": "sesame oil",
+        "store_method": "room",
+        "expiration_duration": 60 * 24 * 100
+    },{
+        "name": "shiitake mushrooms",
+        "store_method": "room",
+        "expiration_duration": 60 * 24 * 5
+    },{
+        "name": "carrot",
+        "store_method": "fridge",
+        "expiration_duration": 60 * 24 * 10
+    },{
+        "name": "duck meat",
+        "store_method": "fridge",
+        "expiration_duration": 60 * 24 * 10
+    },{
+        "name": "olive oil",
+        "store_method": "room",
+        "expiration_duration": 60 * 24 * 100
+    },{
+        "name": "ginger",
+        "store_method": "fridge",
+        "expiration_duration": 60 * 24 * 50
+    },{
+        "name": "carrot",
+        "store_method": "fridge",
+        "expiration_duration": 60 * 24 * 10
+    },{
+        "name": "chicken meat",
+        "store_method": "frozen",
+        "expiration_duration": 60 * 24 * 10
+    },{
+        "name": "teriyaki sauce",
+        "store_method": "fridge",
+        "expiration_duration": 60 * 24 * 300
+    },{
+        "name": "ketchup",
+        "store_method": "fridge",
+        "expiration_duration": 60 * 24 * 900
+    },{
+        "name": "barbecue sauce",
+        "store_method": "fridge",
+        "expiration_duration": 60 * 24 * 300
+    },{
+        "name": "starch syrup",
+        "store_method": "room",
+        "expiration_duration": 60 * 24 * 500
     }]
+
 
 
 def make_temp_user_ing():
@@ -188,6 +253,16 @@ def make_temp_user_ing():
     },{
         "name": "carrot",
         "quantity": 600,
+        "quantity_unit": "g",
+        "store_time": "2020-09-28 15:33"
+    },{
+        "name": "sugar",
+        "quantity": 400,
+        "quantity_unit": "g",
+        "store_time": "2020-09-28 15:33"
+    },{
+        "name": "beef",
+        "quantity": 1800,
         "quantity_unit": "g",
         "store_time": "2020-09-28 15:33"
     },{
