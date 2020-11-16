@@ -44,16 +44,15 @@ class ICC_GUI():
                                 width=width,
                                 height=height,
                                 background='white')
-        frame_user_ing.pack()
-        frame_user_ing.pack_propagate(0)
+        self.frame_user_ing.pack()
+        self.frame_user_ing.pack_propagate(0)
 
-        self.img = tk.PhotoImage(file='onion.png')
         # make_label2(frame_user_ing, "onion.png")
-        self.make_label(frame_user_ing, self.img)
-        self.make_label(frame_user_ing, self.img)
-        self.make_label(frame_user_ing, self.img)
-        self.make_label(frame_user_ing, self.img)
-        self.make_label(frame_user_ing, self.img)
+        self.images = []
+        for i in range(0, 5):
+            img = tk.PhotoImage(file='onion.png')
+            self.make_label(self.frame_user_ing, img)
+            self.images.append(img)
 
     # def update_frame_user_ing(self):
     #     self.frame_user_ing

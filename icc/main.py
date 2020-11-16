@@ -4,9 +4,11 @@ from iccjson.jconnect import *
 from recommend.compare_recipe import *
 from recommend.recommend_recipe import *
 from iccdb.db_manage import *
+from gui.main_gui import *
 
 
 def main_t():
+
 
     icc_db = Icc_db("icc")
     icc_db.add_temp_recipe()
@@ -16,6 +18,7 @@ def main_t():
     recommended_recipe = recommed_recipe()
     print("you should make {}".format(recommended_recipe))
 
+    app = ICC_GUI()
     # print("before user ings {}".format(icc_db.find_user_ings(returnID=False)))
     # remove_recipe_ing_from_user_ing(recommended_recipe)
     # print("after user ings {}".format(icc_db.find_user_ings(returnID=False)))
