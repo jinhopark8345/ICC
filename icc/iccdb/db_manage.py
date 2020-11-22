@@ -258,6 +258,8 @@ class Icc_db:
         return recipes
 
     def find_recipe_ing(self, recipe_name, ing_name, returnID=True):
+        """
+        """
         if returnID == False:
             # find_one will find the object and return the object with id(default)
             recipe = self.recipe.find_one({"name": recipe_name},

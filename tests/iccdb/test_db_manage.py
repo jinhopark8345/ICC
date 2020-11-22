@@ -5,6 +5,7 @@ from pymongo.results import (InsertOneResult, InsertManyResult, UpdateResult,
                              DeleteResult)
 
 
+
 class Test_Icc_db:
     @classmethod
     def setup_class(cls):
@@ -40,19 +41,6 @@ class Test_Icc_db:
         rtv = self.icc_db.add_ing_info(db_apple)
         assert -2 == rtv
 
-    def test_find_ing_info(self):
-        # clean up db
-        self.icc_db.db.drop_collection("ing_info")
-
-        # find, exist one
-        db_apple = make_ing_info("apple", "fridge", 3600)
-        self.icc_db.ing_info.insert_one(db_apple)
-        rtv = self.icc_db.find_ing_info("apple")
-        assert db_apple == rtv
-
-        # find, non-exist one
-        rtv = self.icc_db.find_ing_info("onion")
-        assert rtv == None
 
     def test_update_ing_info(self):
         pass
@@ -95,20 +83,6 @@ class Test_Icc_db:
         db_onion = self.icc_db.user_ing.find_one({"name": "onion"})
         assert test_onion == db_onion
 
-    def test_find_user_ing(self):
-        # clean up db
-        self.icc_db.db.drop_collection("user_ing")
-
-        test_apple = make_user_ing("apple", 400, "g", "2020-10-07 20:34")
-        test_onion = make_user_ing("onion", 400, "g", "2020-10-07 20:34")
-        self.icc_db.user_ing.insert_one(test_apple)
-        self.icc_db.user_ing.insert_one(test_onion)
-
-        apple = self.icc_db.find_user_ing("apple")
-        assert test_apple == apple
-
-        onion = self.icc_db.find_user_ing("onion")
-        assert test_onion == onion
 
     # def test_find_all_user_ing(self):
     #   # clean up db
@@ -189,7 +163,7 @@ class Test_Icc_db:
         # print("rtv0: ", rtv0)
         # print("rtv1: ", rtv1)
 
-        rice_cake = self.icc_db.recipe.find_one({"name": "떡국"})
+        rice_cake = self.icc_db.recipe.find_one({"name": "rice cake soup"})
         curry = self.icc_db.recipe.find_one({"name": "curry"})
         assert rec0 == rice_cake
         assert rec1 == curry
@@ -338,3 +312,94 @@ class Test_Icc_db:
         # print(db_onion2)
 
         assert self.icc_db.find_recipe_ing(rec0["name"], "onion") == db_onion2
+
+    def test_find_ing_info(self):
+        # clean up db
+        self.icc_db.db.drop_collection("ing_info")
+
+        # find, exist one
+        db_apple = make_ing_info("apple", "fridge", 3600)
+        self.icc_db.ing_info.insert_one(db_apple)
+        rtv = self.icc_db.find_ing_info("apple")
+        assert db_apple == rtv
+
+        # find, non-exist one
+        rtv = self.icc_db.find_ing_info("onion")
+        assert rtv == None
+
+    def test_find_user_ing(self):
+        # clean up db
+        self.icc_db.db.drop_collection("user_ing")
+
+        test_apple = make_user_ing("apple", 400, "g", "2020-10-07 20:34")
+        test_onion = make_user_ing("onion", 400, "g", "2020-10-07 20:34")
+        self.icc_db.user_ing.insert_one(test_apple)
+        self.icc_db.user_ing.insert_one(test_onion)
+
+        apple = self.icc_db.find_user_ing("apple")
+        assert test_apple == apple
+
+        onion = self.icc_db.find_user_ing("onion")
+        assert test_onion == onion
+
+    def test_find_recipe(self):
+        # clean up db
+        self.icc_db.db.drop_collection("recipe")
+        recipes = make_temp_recipe()
+        rec0 = recipes[0]
+        rtv0 = self.icc_db.add_recipe(rec0)
+
+        assert self.icc_db.find_recipe(rec0["name"]) == rec0
+
+    def test_find_recipes(self):
+        # clean up db
+        self.icc_db.db.drop_collection("recipe")
+        recipes = make_temp_recipe()
+
+        for recipe in recipes:
+            rtv = self.icc_db.add_recipe(recipe)
+            print(rtv)
+
+        # print(recipes)
+        # print(self.icc_db.find_recipes())
+
+        assert self.icc_db.find_recipes() == recipes
+
+    def test_find_recipe_ing(self):
+        # clean up db
+        self.icc_db.db.drop_collection("recipe")
+        recipes = make_temp_recipe()
+        rec0 = recipes[0]
+        rtv0 = self.icc_db.add_recipe(rec0)
+
+        # db_watermelon = make_recipe_ing("wm", 700, 'g')
+        # db_onion = make_recipe_ing("onion", 7 * 60 * 24, "g")
+        # db_apple = make_recipe_ing("apple", 3600, "kg")
+
+        # self.icc_db.add_recipe_ing(rec0["name"], db_apple)
+
+        # assert self.icc_db.find_recipe_ing(rec0["name"], "apple") == db_apple
+
+        recipe_name = rec0["name"]
+
+        ing = make_recipe_ing("jinho", 500, 'g')
+        ing2 = make_recipe_ing("jaehyun", 700, 'g')
+
+        rtv = self.icc_db.add_recipe_ing(recipe_name, ing)
+        rtv2 = self.icc_db.add_recipe_ing(recipe_name, ing2)
+
+        assert self.icc_db.find_recipe_ing(recipe_name, "jinho") == ing
+        assert self.icc_db.find_recipe_ing(recipe_name, "jaehyun") == ing2
+
+
+
+    def test_find_user_ings(self):
+        pass
+    def test_find_ing_infos(self):
+        pass
+
+    def test_add_temp_recipe(self):
+        pass
+
+    def test_add_temp_ing_info(self):
+        pass

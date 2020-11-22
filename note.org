@@ -1,0 +1,11 @@
+1. don't know how to find methods that doesn't have test method /
+   python ~unit test~ check if function has ~one to one test~
+2. change from replace every ings to
+   #+begin_src python :results output
+    def replace_recipe_ings(self, recipe):
+        return self.recipe.find_one_and_update(
+            {"name": recipe["name"]}, {"$set": {
+                "ings": recipe["ings"]
+            }},
+            upsert=False)
+   #+end_src
