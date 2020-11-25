@@ -3,42 +3,52 @@
         "name": "rice cake",
         "like": 7,
         "ings": [
-            [
-                "green onion",
-                500,
-                "g"
-            ],
-            [
-                "pepper",
-                700,
-                "kg"
-            ],
-            [
-                "water",
-                500,
-                "ml"
-            ]
+            {
+                "name": "green onion",
+                "quantity": 500,
+                "quantity_unit": "g"
+            },
+            {
+                "name": "pepper",
+                "quantity": 700,
+                "quantity_unit": "kg"
+            },
+            {
+                "name": "water",
+                "quantity": 500,
+                "quantity_unit": "ml"
+            },
+            {
+                "name": "water2",
+                "quantity": 500,
+                "quantity_unit": "ml"
+            },
+            {
+                "name": "water3",
+                "quantity": 477,
+                "quantity_unit": "ml"
+            }
         ]
     },
     {
         "name": "curry",
         "like": 5,
         "ings": [
-            [
-                "red pepper",
-                500,
-                "g"
-            ],
-            [
-                "onion",
-                700,
-                "kg"
-            ],
-            [
-                "kimchi",
-                20,
-                "kg"
-            ]
+            {
+                "name": "red pepper",
+                "quantity": 500,
+                "quantity_unit": 50
+            },
+            {
+                "name": "onion",
+                "quantity": 700,
+                "quantity_unit": "kg"
+            },
+            {
+                "name": "kimchi",
+                "quantity": 20,
+                "quantity_unit": "kg"
+            }
         ]
     }
 ]

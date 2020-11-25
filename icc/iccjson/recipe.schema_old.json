@@ -1,0 +1,31 @@
+{
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string"
+        },
+        "like": {
+            "type": "number"
+        },
+        "ings": {
+            "type": "array",
+            "items": [
+                {
+                    "type": "object",
+                    "items": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "number"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "additionalProperties": false
+}

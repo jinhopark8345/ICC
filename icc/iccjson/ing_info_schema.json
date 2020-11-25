@@ -14,5 +14,9 @@
             "type": "string"
         }
     },
-    "required": ["name", "store_method", "expiration_duration"]
+    "required": [
+        "name",
+        "store_method",
+        "expiration_duration"
+    ]
 }

@@ -1,6 +1,6 @@
 def make_recipe_info():
     direction = []
-    direction.append(["green onion water",500, "g"])
+    direction.append(["green onion water", 500, "g"])
     direction.append(["carrot", 700, "kg"])
     direction.append(["water", 500, "ml"])
     recipes = {}
@@ -11,10 +11,6 @@ def make_recipe_info():
         'ings': direction
     })
 
-    recipes['recipe'].append({
-        'name': 'curry',
-        'like': 5,
-        'ings': direction
-    })
+    recipes['recipe'].append({'name': 'curry', 'like': 5, 'ings': direction})
 
     return recipes
