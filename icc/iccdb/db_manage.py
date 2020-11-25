@@ -295,6 +295,7 @@ class Icc_db:
 
     def add_temp_recipe(self):
         self.db.drop_collection("recipe")
+    
         recipes = make_temp_recipe()
         for recipe in recipes:
             # print(recipe)

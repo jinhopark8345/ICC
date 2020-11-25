@@ -1,5 +1,5 @@
 from iccdb.db_manage import Icc_db
-from iccjson.jconnect import make_ing_info, make_user_ing, make_temp_recipe, make_recipe, make_recipe_ing
+from iccjson.jconnect import make_ing_info, make_user_ing, make_temp_recipe, make_recipe, make_recipe_ing,make_temp_ing_info
 
 from pymongo.results import (InsertOneResult, InsertManyResult, UpdateResult,
                              DeleteResult)
@@ -394,12 +394,53 @@ class Test_Icc_db:
 
 
     def test_find_user_ings(self):
-        pass
+        # clean up db
+        self.icc_db.db.drop_collection("user_ing")
+
+        # add with icc user ing
+        test = []
+        test_apple = make_user_ing("apple", 400, "g", "2020-10-07 20:34")
+        test_onion = make_user_ing("onion", 400, "g", "2020-10-07 20:34")
+        test.append(test_apple)
+        test.append(test_onion)
+
+        self.icc_db.add_user_ing(test_apple)
+        self.icc_db.add_user_ing(test_onion)   
+
+        assert self.icc_db.find_user_ings() == test
+
     def test_find_ing_infos(self):
-        pass
+        ### find_ing_infos(returnID=True ) 인 이유는?
+
+        # clean up db
+        self.icc_db.db.drop_collection("ing_info")
+
+        # right case
+        db_apple = make_ing_info("apple", "fridge", 3600)
+        db_onion = make_ing_info("onion", "fridge", 7 * 60 * 24)
+        self.icc_db.add_ing_info(db_apple)
+        self.icc_db.add_ing_info(db_onion)
+       
+        test = []
+        test.append(db_apple)
+        test.append(db_onion)
+
+        print(test)
+        print( self.icc_db.find_ing_infos() )
+        assert self.icc_db.find_ing_infos(True) == test
+        
 
     def test_add_temp_recipe(self):
-        pass
+        self.icc_db.add_temp_recipe()
+        recipe=make_temp_recipe()
+        
+        assert self.icc_db.find_recipes(False) == recipe
 
     def test_add_temp_ing_info(self):
+        ##### error -> 겹치는 것 있을 때 문제점 해결가능.
+        self.icc_db.add_temp_ing_info()
+        ing_info=make_temp_ing_info()
+        print(len(ing_info))
+        print( len(self.icc_db.find_ing_infos(False)))
+        assert self.icc_db.find_ing_infos(False) == ing_info
         pass
