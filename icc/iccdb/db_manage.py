@@ -37,6 +37,7 @@ class Icc_db:
 
         else:
             # ingredient already exist
+            print("add_ing_info error: {}, already exist".format(ing_info))
             return -2
 
     def update_ing_info(self, ing):
