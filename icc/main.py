@@ -82,3 +82,6 @@ def hello(name=None):
 
 if __name__ == '__main__':
     app.run(port=5000)
+
+# export FLASK_APP=main.py
+# flask run
