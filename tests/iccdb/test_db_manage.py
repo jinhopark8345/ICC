@@ -1,15 +1,15 @@
-from iccdb.db_manage import Icc_db
+from iccdb.db_manage import IccDB
 from iccjson.jconnect import *
 
 from pymongo.results import (InsertOneResult, InsertManyResult, UpdateResult,
                              DeleteResult)
 
 
-class Test_Icc_db:
+class Test_IccDB:
     @classmethod
     def setup_class(cls):
         "Runs once per class"
-        cls.icc_db = Icc_db("icc_test")
+        cls.icc_db = IccDB("icc_test")
 
     @classmethod
     def teardown_class(cls):

@@ -1,5 +1,5 @@
 # from iccdb.db_manage import find_ing_info, find_user_ing, find_recipe, find_recipe_ing
-from iccdb.db_manage import Icc_db
+from iccdb.db_manage import IccDB
 from recommend.compare_recipe import *
 
 
@@ -54,7 +54,7 @@ def score_recipe(recipe, user_ings):
     total_time_left = 0
 
     time_format = "%Y-%m-%d %H:%M"
-    db = Icc_db("icc")
+    db = IccDB("icc")
     KST = timezone('Asia/Seoul')
     for need_ing in need_ings:
         ing_name = need_ing["name"]
@@ -100,7 +100,7 @@ def score_recipe(recipe, user_ings):
 
 def recommed_recipe():
 
-    icc_db = Icc_db("icc")
+    icc_db = IccDB("icc")
     user_ings = icc_db.find_user_ings(returnID=False)
 
     cur_score = -100000000
@@ -120,7 +120,7 @@ def remove_recipe_ing_from_user_ing(recipe_name):
     make a recipe and remove used ings from user_ings
     """
 
-    icc_db = Icc_db("icc")
+    icc_db = IccDB("icc")
     recipe = icc_db.find_recipe(recipe_name, returnID=False)
     user_ings = icc_db.find_user_ings(returnID=False)
     need_ings = get_need_ings(recipe, user_ings)
