@@ -3,7 +3,7 @@ icc db manage API
 """
 from pymongo import MongoClient
 
-from iccjson.jconnect import validateJson, get_schema
+from iccjson.jconnect import validate_json, get_schema
 from iccjson.jconnect import make_temp_ing_info, make_temp_user_ing, make_temp_recipe
 
 
@@ -30,7 +30,7 @@ class IccDB:
         """
     # check if the format is correct
     ing_info_schema = get_schema("ing_info")
-    if not validateJson(ing_info, ing_info_schema):
+    if not validate_json(ing_info, ing_info_schema):
       # temporary sol, need to change
       return -1
 
@@ -52,7 +52,7 @@ class IccDB:
   def add_user_ing(self, user_ing):
     # check if the format is correct
     user_info_schema = get_schema("user_ing")
-    if not validateJson(user_ing, user_info_schema):
+    if not validate_json(user_ing, user_info_schema):
       # temporary sol, need to change
       return -1
 
@@ -128,7 +128,7 @@ class IccDB:
         """
     # check if the format is correct
     recipe_schema = get_schema("recipe")
-    if not validateJson(recipe, recipe_schema):
+    if not validate_json(recipe, recipe_schema):
       # temporary sol, need to change
       return -1
 
