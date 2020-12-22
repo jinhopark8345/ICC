@@ -19,14 +19,16 @@ class IccDB:
     self.ing_info = self.db.ing_info
 
   def add_ing_info(self, ing_info):
-    """add ing to ing_info if it doesn't exist,
-        if so, then update the ing
+    """add ing to ing_info
 
+    Args:
+      ing: ingredient to be added to user_ing
+      ing_example = {"onion", "fridge", "1440"}
 
-        Args:
-            ing: ingredient to be added to user_ing
-            ing_example = {"onion", "fridge", "1440"}
-        Returns:
+    Returns:
+      -1: invalid schema
+      -2: ing_info already exist in the DB
+
         """
     # check if the format is correct
     ing_info_schema = get_schema("ing_info")
@@ -103,7 +105,6 @@ class IccDB:
       self.user_ing.insert_one(ing)
 
   def print_user_ing(self):
-    # user_ing = self.user_ing.find({})
     for ing in self.user_ing.find({}):
       print(ing)
 
@@ -111,15 +112,13 @@ class IccDB:
     self.user_ing.delete_one({"name": ing_name})
 
   def add_recipe(self, recipe):
-    """add recipe to db.recipe if it doesn't exist,
-        if so, then update the recipe
+    """add recipe to db.recipe
 
         Args:
-            ing: ingredient to be added to user_ing
+            recipe: ingredient to be added to user_ing
             ing_example = {"onion", "fridge", "1440"}
         Returns:
         """
-    # check if the format is correct
     recipe_schema = get_schema("recipe")
     if not validate_json(recipe, recipe_schema):
       # temporary sol, need to change
