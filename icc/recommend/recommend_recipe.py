@@ -20,22 +20,6 @@ def get_total_quantity(need_ings):
   return sum([ing["quantity"] for ing in need_ings])
 
 
-# def recommend_recipe(recipes_need_quantity):
-#     """find smallest quantity among quantities
-
-#     Args:
-#         recipes_need_quantity list of quantity total, each quantity total
-#        show how much quantity user needs to make the recipe
-
-#     Returns:
-#         name of the recipe
-
-#     """
-
-#     ing = min(recipes_need_quantity, key=lambda recipe: recipe[0])
-#     return ing[1]
-
-
 def score_recipe(recipe, user_ings):
   need_ings = get_need_ings(recipe, user_ings)
   if need_ings is None:
@@ -128,17 +112,6 @@ def remove_recipe_ing_from_user_ing(recipe_name):
   recipe = icc_db.find_recipe(recipe_name, returnID=False)
   user_ings = icc_db.find_user_ings(returnID=False)
   need_ings = get_need_ings(recipe, user_ings)
-
-  # if need_ings in (None, []):
-  #   print("user ingredients are enough to make {}, start making {}".format(
-  #       recipe_name, recipe_name))
-
-  #   for recipe_ing in recipe["ings"]:
-  #     recipe_ing["quantity"] = -1 * recipe_ing["quantity"]
-  #     icc_db.update_user_ing(recipe_ing)
-  # else:
-  #   print("user ingredients not enough to make {}, need_ings: {}".format(
-  #       recipe_name, need_ings))
 
   if need_ings in (None, []):
     print("user ingredients are enough to make {name}, start making {name}".

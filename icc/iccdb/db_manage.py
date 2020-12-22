@@ -102,13 +102,6 @@ class IccDB:
       # ingreident to user_ing
       self.user_ing.insert_one(ing)
 
-  # def find_all_user_ing(self, return_id=True):
-  #   if return_id == False:
-  #     # find_one will find the object and return the object with id(default)
-  #     return self.user_ing.find({},{"_id": False})
-  #   else:
-  #     return self.user_ing.find({})
-
   def print_user_ing(self):
     # user_ing = self.user_ing.find({})
     for ing in self.user_ing.find({}):
@@ -294,6 +287,3 @@ class IccDB:
       rtv = self.add_ing_info(ing_info)
       if rtv in (-1, -2):
         print("add_recipe error code : {}".format(rtv))
-
-        # (when (flycheck-may-enable-checker 'python-pylint)
-        #   (flycheck-select-checker 'python-pylint))

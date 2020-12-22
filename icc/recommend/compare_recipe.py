@@ -2,9 +2,6 @@
 compare recpie API
 """
 
-# from iccdb.db_manage import IccDB
-# from iccjson.jconnect import *
-
 
 def is_comparable(ask_ing, user_ing):
   """tell if the ingredients are comparable
@@ -40,11 +37,6 @@ def get_diff_ing(ask_ing, user_ing):
     diff_quantity = ask_ing["quantity"] - user_ing["quantity"]
     user_ing["quantity"] = diff_quantity
     return user_ing
-    # return {
-    #     "name": ask_ing["name"],
-    #     "quantity": ask_ing["quantity"] - user_ing["quantity"],
-    #     "quantity_unit": ask_ing["quantity_unit"],
-    # }
   else:
     print("wrong use case")
 
