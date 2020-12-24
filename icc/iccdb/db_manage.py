@@ -133,14 +133,30 @@ class Icc_db:
         - update_recipe_ing: / using replace_recipe_ings
     """
 
+
     def add_recipe(self, recipe):
-        """add recipe to db.recipe if it doesn't exist,
+        """add recipe to db.recipe if it doesn't exist in database,
         if so, then update the recipe
 
         Args:
-            ing: ingredient to be added to user_ing
-            ing_example = {"onion", "fridge", "1440"}
+           recipe: type: dict. It include recpie_name, like, ings_name, ings_quantity_unit, ings_quantity.
+           recipe_example :
+           {
+            "name":
+            "rice cake soup",
+            "like":
+            7,
+            "ings": [{
+                "name": "green onion",
+                "quantity": 500,
+                "quantity_unit": "g"
+            }]
+            }
         Returns:
+            -1 : output is an integer -1, when the format does not match the specific schema.
+            -2 : output is an integer -2, when recipe to add already exist in dbMongo of recpies.
+            "recipe" : output is recipe to add. type is dict 
+            
         """
         # check if the format is correct
         recipe_schema = get_schema("recipe")
@@ -157,9 +173,34 @@ class Icc_db:
             return -2
 
     def delete_recipe(self, recipe_name):
+        """delete one recipe to db.recipe,
+
+        Args:
+            recipe_name: type is string.
+            
+        Returns:
+        """
         return self.recipe.delete_many({"name": recipe_name})
 
     def replace_recipe_ings(self, recipe):
+        """ replace existing ing in recipe with new ing.  
+        Args:
+            recipe: type is dict. It include recpie_name, like, ings_name, ings_quantity_unit, ings_quantity.
+            recipe_example :
+           {
+            "name":
+            "rice cake soup",
+            "like":
+            7,
+            "ings": [{
+                "name": "green onion",
+                "quantity": 500,
+                "quantity_unit": "g"
+            }]
+            }
+        Returns:
+ 
+        """
         return self.recipe.find_one_and_update(
             {"name": recipe["name"]}, {"$set": {
                 "ings": recipe["ings"]
@@ -167,6 +208,13 @@ class Icc_db:
             upsert=False)
 
     def replace_recipe_like(self, recipe):
+        """ replace existing like in recipe with new like.
+            
+        Args:
+            replace existing ing in recipe with new ing.
+        Returns:
+ 
+        """
         return self.recipe.find_one_and_update(
             {"name": recipe["name"]}, {"$set": {
                 "like": recipe["like"]
@@ -174,7 +222,17 @@ class Icc_db:
             upsert=False)
 
     def update_recipe_like(self, recipe_name, like=1, replace_flag=False):
-
+        """update value of like in recipe when replace_flag is False.
+        when replace_flag is True, replace value of like in recipe with value of like as args.
+        
+        Args:
+            recipe_name: type is string.
+            like: type is integer.
+            replace_flag: Optional; 
+            
+        Returns:   
+ 
+        """
         recipe = self.find_recipe(recipe_name)
 
         if not replace_flag:
@@ -187,6 +245,16 @@ class Icc_db:
         self.replace_recipe_like(recipe)
 
     def add_recipe_ing(self, recipe_name, ing):
+        """add ing in ings of recipe to db.recipe
+        
+        Args:
+            recipe_name: type is string.
+            ing: type is dict. ingredient to be added to ing in recipe.
+            ing_example = {"onion", "fridge", "1440"}
+            
+        Returns:   
+ 
+        """
         # need to check recipe ing schema
         recipe = self.find_recipe(recipe_name)
 
@@ -196,16 +264,34 @@ class Icc_db:
         self.replace_recipe_ings(recipe)
 
     def delete_recipe_ing(self, recipe_name, ing_name):
+        """delete ing in ings of recipe to db.recipe
+        
+        Args:
+            recipe_name: type is string.
+            ing_name: type is string. ingredient to be deleted to ing in ings of recipe.
+        Returns:   
+ 
+        """
         # 2. update ings - delete ing
         recipe = self.find_recipe(recipe_name)
-        recipe['ings'] = [
+        recipe['ings'] = [ 
             ing for ing in recipe['ings'] if ing["name"] != ing_name
         ]
 
         self.replace_recipe_ings(recipe)
 
     def update_recipe_ing(self, recipe_name, ing, replace_flag=False):
-        "update/replace recipe ing quantity"
+        """update value of ing_quantity in ing of recipe when replace_flag is False.
+        when replace_flag is True, replace value of ing_quantity in ing of recipe with value of ing as args.
+        
+        Args:
+            recipe_name: type is string.
+            ing: type is dict.
+            replace_flag: Optional; 
+            
+        Returns:   
+ 
+        """
         # need to check recipe ing schema
 
         recipe = self.find_recipe(recipe_name)
@@ -219,12 +305,28 @@ class Icc_db:
         self.replace_recipe_ings(recipe)
 
     def find_ing_info(self, ing_name):
-        ing = self.ing_info.find_one({"name": ing_name})
+        """find ing_info in db.ing_info
+        
+        Args:
+            ing_name: type is string.
+        Returns:
+            ing_info: type is dict.  
+        """
+        ing_info = self.ing_info.find_one({"name": ing_name})
 
         # return None if ing doesn't exist on DB
-        return ing
+        return ing_info
 
     def find_user_ing(self, ing_name, returnID=True):
+        """find user_ing in db.user_ing.
+        if returnID is True,print ID. else, not print ID.
+        
+        Args:
+            ing_name: type is string.
+            returnID: optional;
+        Returns:
+            ing: type is dict.  
+        """
         if returnID == False:
             # find_one will find the object and return the object with id(default)
             ing = self.user_ing.find_one({"name": ing_name}, {"_id": False})
@@ -235,6 +337,15 @@ class Icc_db:
             return ing
 
     def find_recipe(self, recipe_name, returnID=True):
+        """find recipe in db.recipe.
+        if returnID is True, print ID. else, not print ID.
+        
+        Args:
+            recipe_name: type is string.
+            returnID: optional;
+        Returns:
+            recipe: type is dict.  
+        """
         if returnID == False:
             # find_one will find the object and return the object with id(default)
             recipe = self.recipe.find_one({"name": recipe_name},
@@ -245,6 +356,14 @@ class Icc_db:
             return recipe
 
     def find_recipes(self, returnID=True):
+        """find all recipes in db.recipe.
+        if returnID is True, print ID. else, not print ID.
+        
+        Args:
+            returnID: optional;
+        Returns:
+            recipe: type is dict.  
+        """
         cursor = self.recipe  # choosing the collection you need
         recipes = []
 
@@ -258,7 +377,13 @@ class Icc_db:
         return recipes
 
     def find_recipe_ing(self, recipe_name, ing_name, returnID=True):
-        """
+        """find ing of recipe in db.recipe.
+        if returnID is True, print ID. else, not print ID.
+        
+        Args:
+            returnID: optional;
+        Returns:
+            ing: type is dict.
         """
         if returnID == False:
             # find_one will find the object and return the object with id(default)
@@ -274,6 +399,14 @@ class Icc_db:
                     return ing
 
     def find_user_ings(self, returnID=True):
+        """find all user_ings in db.user_ing.
+        if returnID is True, print ID. else, not print ID.
+        
+        Args:
+            returnID: optional;
+        Returns:
+            ing_info: tpye is dict.
+        """
         user_ings = []
         if returnID == False:
             for user_ing in self.user_ing.find({}, {"_id": False}):
@@ -284,6 +417,15 @@ class Icc_db:
         return user_ings
 
     def find_ing_infos(self, returnID=False):
+        """find all ing_infos in db.ing_info.
+        if returnID is True, print ID. else, not print ID.
+        
+        Args:
+            returnID: optional;
+        Returns:
+            ing_info: tpye is dict.
+        """
+    
         ing_infos = []
         if returnID == False:
             for ing_info in self.ing_info.find({}, {"_id": False}):
