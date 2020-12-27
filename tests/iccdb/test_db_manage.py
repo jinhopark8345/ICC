@@ -150,11 +150,11 @@ class Test_IccDB:
     def test_add_recipe(self):
         # clean up db
         self.icc_db.db.drop_collection("recipe")
-        
+
         recipes = make_temp_recipe()
         rec0 = recipes[0]
         rec1 = recipes[1]
-        
+
         rtv0 = self.icc_db.add_recipe(rec0)
         rtv1 = self.icc_db.add_recipe(rec1)
         # print("rtv0: ", rtv0)
@@ -164,7 +164,6 @@ class Test_IccDB:
         curry = self.icc_db.recipe.find_one({"name": "curry"})
         assert rec0 == rice_cake
         assert rec1 == curry
-      # assert False
 
     def test_delete_recipe(self):
         # clean up db
@@ -256,10 +255,11 @@ class Test_IccDB:
         db_watermelon = make_recipe_ing("wm", 700, 'g')
         db_onion = make_recipe_ing("onion", 7 * 60 * 24, "g")
         db_apple = make_recipe_ing("apple", 3600, "kg")
+
         self.icc_db.add_recipe_ing(rec0["name"], db_apple)
 
         assert self.icc_db.find_recipe_ing(rec0["name"], "apple") == db_apple
-         
+
     def test_delete_recipe_ing(self):
         # clean up db
         self.icc_db.db.drop_collection("recipe")
@@ -319,11 +319,10 @@ class Test_IccDB:
         self.icc_db.ing_info.insert_one(db_apple)
         rtv = self.icc_db.find_ing_info("apple")
         assert db_apple == rtv
-        print(type(rtv))
+
         # find, non-exist one
         rtv = self.icc_db.find_ing_info("onion")
         assert rtv == None
-        
 
     def test_find_user_ing(self):
         # clean up db

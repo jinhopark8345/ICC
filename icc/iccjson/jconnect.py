@@ -164,6 +164,10 @@ def make_temp_ing_info():
         "store_method": "room",
         "expiration_duration": 60 * 24 * 5
     },{
+        "name": "carrot",
+        "store_method": "fridge",
+        "expiration_duration": 60 * 24 * 10
+    },{
         "name": "duck meat",
         "store_method": "fridge",
         "expiration_duration": 60 * 24 * 10
