@@ -136,3 +136,4 @@ plan.org
 # projectile
 .projectile
 .dir-locals.el
+.vscode
