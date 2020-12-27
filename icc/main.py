@@ -1,4 +1,5 @@
-
+from flask import Flask, render_template
+app = Flask(__name__)
 
 from iccjson.jconnect import *
 from recommend.compare_recipe import *
@@ -9,24 +10,24 @@ from gui.main_gui import *
 
 def main_t():
 
+  icc_db = IccDB("icc")
+  icc_db.add_temp_recipe()
+  icc_db.add_temp_user_ing()
+  icc_db.add_temp_ing_info()
 
-    icc_db = Icc_db("icc")
-    icc_db.add_temp_recipe()
-    icc_db.add_temp_user_ing()
-    icc_db.add_temp_ing_info()
+  recommended_recipe = recommed_recipe()
+  print("you should make {}".format(recommended_recipe))
 
-    recommended_recipe = recommed_recipe()
-    print("you should make {}".format(recommended_recipe))
+  app = ICC_GUI()
+  # print("before user ings {}".format(icc_db.find_user_ings(returnID=False)))
+  # remove_recipe_ing_from_user_ing(recommended_recipe)
+  # print("after user ings {}".format(icc_db.find_user_ings(returnID=False)))
+  # remove_recipe_ing_from_user_ing(recommended_recipe)
+  # print("after user ings {}".format(icc_db.find_user_ings(returnID=False)))
+  pass
 
-    app = ICC_GUI()
-    # print("before user ings {}".format(icc_db.find_user_ings(returnID=False)))
-    # remove_recipe_ing_from_user_ing(recommended_recipe)
-    # print("after user ings {}".format(icc_db.find_user_ings(returnID=False)))
-    # remove_recipe_ing_from_user_ing(recommended_recipe)
-    # print("after user ings {}".format(icc_db.find_user_ings(returnID=False)))
-    pass
 
-main_t()
+# main_t()
 
 # import tkinter as tk
 
@@ -53,3 +54,32 @@ main_t()
 # root = tk.Tk()
 # app = IccGUI(master=root)
 # app.mainloop()
+
+
+@app.route('/hello/')
+@app.route('/hello/<name>')
+def hello(name=None):
+
+  icc_db = IccDB("icc")
+  icc_db.add_temp_recipe()
+  icc_db.add_temp_user_ing()
+  icc_db.add_temp_ing_info()
+
+  recommended_recipe = recommed_recipe()
+  print("you should make {}".format(recommended_recipe))
+
+  ing_info = icc_db.find_ing_infos()
+  print(ing_info)
+
+  # client = MongoClient()
+  # db = client["icc"]
+  # temp = db.user_ing.find({})
+  # print(temp)
+  return render_template('index.html', data=ing_info)
+
+
+if __name__ == '__main__':
+  app.run(port=5000)
+
+# export FLASK_APP=main.py
+# flask run

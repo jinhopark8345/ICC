@@ -1,15 +1,15 @@
 from iccdb.db_manage import Icc_db
 from iccjson.jconnect import make_ing_info, make_user_ing, make_temp_recipe, make_recipe, make_recipe_ing,make_temp_ing_info
+
 from pymongo.results import (InsertOneResult, InsertManyResult, UpdateResult,
                              DeleteResult)
 
 
-
-class Test_Icc_db:
+class Test_IccDB:
     @classmethod
     def setup_class(cls):
         "Runs once per class"
-        cls.icc_db = Icc_db("icc_test")
+        cls.icc_db = IccDB("icc_test")
 
     @classmethod
     def teardown_class(cls):
@@ -39,7 +39,6 @@ class Test_Icc_db:
         # return -2 case
         rtv = self.icc_db.add_ing_info(db_apple)
         assert -2 == rtv
-
 
     def test_update_ing_info(self):
         pass
@@ -81,7 +80,6 @@ class Test_Icc_db:
 
         db_onion = self.icc_db.user_ing.find_one({"name": "onion"})
         assert test_onion == db_onion
-
 
     # def test_find_all_user_ing(self):
     #   # clean up db
@@ -391,8 +389,6 @@ class Test_Icc_db:
         assert self.icc_db.find_recipe_ing(recipe_name, "jinho") == ing
         assert self.icc_db.find_recipe_ing(recipe_name, "jaehyun") == ing2
 
-
-
     def test_find_user_ings(self):
         # clean up db
         self.icc_db.db.drop_collection("user_ing")
@@ -405,7 +401,7 @@ class Test_Icc_db:
         test.append(test_onion)
 
         self.icc_db.add_user_ing(test_apple)
-        self.icc_db.add_user_ing(test_onion)   
+        self.icc_db.add_user_ing(test_onion)
 
         assert self.icc_db.find_user_ings() == test
 
@@ -420,27 +416,28 @@ class Test_Icc_db:
         db_onion = make_ing_info("onion", "fridge", 7 * 60 * 24)
         self.icc_db.add_ing_info(db_apple)
         self.icc_db.add_ing_info(db_onion)
-       
+
         test = []
         test.append(db_apple)
         test.append(db_onion)
 
         print(test)
-        print( self.icc_db.find_ing_infos() )
+        print(self.icc_db.find_ing_infos())
         assert self.icc_db.find_ing_infos(True) == test
-        
 
     def test_add_temp_recipe(self):
         self.icc_db.add_temp_recipe()
-        recipe=make_temp_recipe()
-        
+        recipe = make_temp_recipe()
+
         assert self.icc_db.find_recipes(False) == recipe
 
     def test_add_temp_ing_info(self):
+        # clean up db
+        self.icc_db.db.drop_collection("ing_info")
+
         ##### error -> 겹치는 것 있을 때 문제점 해결가능.
         self.icc_db.add_temp_ing_info()
-        ing_info=make_temp_ing_info()
-        print(len(ing_info))
-        print( len(self.icc_db.find_ing_infos(False)))
-        assert self.icc_db.find_ing_infos(False) == ing_info
-        pass
+        ing_infos = make_temp_ing_info()
+        print(len(ing_infos))
+        print(len(self.icc_db.find_ing_infos(False)))
+        assert self.icc_db.find_ing_infos(False) == ing_infos

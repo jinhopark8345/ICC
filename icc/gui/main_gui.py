@@ -14,7 +14,7 @@ class ICC_GUI():
     def __init__(self):
         self.root = tk.Tk()
         self.root.title("foo")
-        self.db = Icc_db("icc")
+        self.db = IccDB("icc")
         self.images = []
 
         self.init_frame_user_ing()
