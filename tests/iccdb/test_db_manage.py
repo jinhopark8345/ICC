@@ -1,6 +1,5 @@
 from iccdb.db_manage import Icc_db
 from iccjson.jconnect import make_ing_info, make_user_ing, make_temp_recipe, make_recipe, make_recipe_ing,make_temp_ing_info
-
 from pymongo.results import (InsertOneResult, InsertManyResult, UpdateResult,
                              DeleteResult)
 

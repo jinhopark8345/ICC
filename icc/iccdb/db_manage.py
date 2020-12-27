@@ -3,7 +3,6 @@ import datetime
 
 from pymongo import MongoClient
 from pymongo import ReturnDocument
-
 from iccjson.jconnect import *
 # from recommend.compare_recipe import get_need_ings
 
@@ -303,7 +302,7 @@ class Icc_db:
                     db_ing["quantity"] = ing["quantity"]
 
         self.replace_recipe_ings(recipe)
-
+        
     def find_ing_info(self, ing_name):
         """find ing_info in db.ing_info
         
