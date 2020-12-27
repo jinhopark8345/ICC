@@ -2,11 +2,11 @@
     {
         "name": "green onion",
         "store_method": "fridge",
-        "expiration_duration": 30
+        "expiration_duration": 1440
     },
     {
         "name": "onion",
         "store_method": "room",
-        "expiration_duration": 7
+        "expiration_duration": 10080
     }
 ]

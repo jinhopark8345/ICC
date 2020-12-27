@@ -1,60 +1,132 @@
 [
-    {
-        "name": "rice cake",
-        "like": 7,
-        "ings": [
-            {
-                "name": "green onion",
-                "quantity": 500,
-                "quantity_unit": "g"
-            },
-            {
-                "name": "pepper",
-                "quantity": 700,
-                "quantity_unit": "kg"
-            },
-            {
-                "name": "water",
-                "quantity": 500,
-                "quantity_unit": "ml"
-            },
-            {
-                "name": "water2",
-                "quantity": 500,
-                "quantity_unit": "ml"
-            },
-            {
-                "name": "water3",
-                "quantity": 477,
-                "quantity_unit": "ml"
-            },
-            {
-                "name": "kimchi",
-                "quantity": 359,
-                "quantity_unit": "kg"
-            }
+	{
+		"name": "rice cake",
+		"like": 7,
+		"ings": [
+			{
+				"name": "green onion",
+				"quantity": 500,
+				"quantity_unit": "g"
+			},
+			{
+				"name": "pepper",
+				"quantity": 700,
+				"quantity_unit": "kg"
+			},
+			{
+				"name": "water",
+				"quantity": 500,
+				"quantity_unit": "ml"
+			},
+			{
+				"name": "water2",
+				"quantity": 500,
+				"quantity_unit": "ml"
+			},
+			{
+				"name": "water3",
+				"quantity": 477,
+				"quantity_unit": "ml"
+			},
+			{
+				"name": "kimchi",
+				"quantity": 359,
+				"quantity_unit": "kg"
+			}
+		]
+	},
+	{
+		"name": "curry",
+		"like": 5,
+		"ings": [
+			{
+				"name": "red pepper",
+				"quantity": 500,
+				"quantity_unit": 50
+			},
+			{
+				"name": "onion",
+				"quantity": 700,
+				"quantity_unit": "kg"
+			},
+			{
+				"name": "kimchi",
+				"quantity": 20,
+				"quantity_unit": "kg"
+			}
+		]
+	},
+	{
+		"name": "kimchi stew",
+		"like": 4,
+		"ings": [
+			{
+				"name": "red pepper",
+				"quantity": 500,
+				"quantity_unit": 50
+			},
+			{
+				"name": "onion",
+				"quantity": 200,
+				"quantity_unit": "g"
+			},
+			{
+				"name": "kimchi",
+				"quantity": 20,
+				"quantity_unit": "kg"
+			},
+			{
+				"name": "sugar",
+				"quantity": 20,
+				"quantity_unit": "g"
+			},
+			{
+				"name": "soup soy sauce",
+				"quantity": 20,
+				"quantity_unit": "g"
+			},
+			{
+				"name": "pork",
+				"quantity": 150,
+				"quantity_unit": "g"
+			}
+		]
+	},
+	{
+		"name": "Doenjang-jjigae",
+		"like": 9,
+		"ings": [
+			{
+				"name": "red pepper",
+				"quantity": 500,
+				"quantity_unit": 50
+			},
+			{
+				"name": "onion",
+				"quantity": 200,
+				"quantity_unit": "g"
+			},
+			{
+				"name": "sugar",
+				"quantity": 10,
+				"quantity_unit": "g"
+			},
+			{
+				"name": "beef",
+				"quantity": 50,
+				"quantity_unit": "g"
+			},
+			{
+				"name": "Doenjang",
+				"quantity": 40,
+				"quantity_unit": "g"
+			},
+			{
+				"name": "water",
+				"quantity": 300,
+				"quantity_unit": "ml"
+			}
 
-        ]
-    },
-    {
-        "name": "curry",
-        "like": 5,
-        "ings": [
-            {
-                "name": "red pepper",
-                "quantity": 500,
-                "quantity_unit": 50
-            },
-            {
-                "name": "onion",
-                "quantity": 700,
-                "quantity_unit": "kg"
-            },
-            {
-                "name": "kimchi",
-                "quantity": 20,
-                "quantity_unit": "kg"
-            }
-        ]
-    }
+		]
+	}
 ]

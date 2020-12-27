@@ -136,3 +136,7 @@ dmypy.json
 .pyre/
 
 plan.org
+
+# projectile
+.projectile
+.dir-locals.el
