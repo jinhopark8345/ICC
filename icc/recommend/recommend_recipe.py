@@ -89,7 +89,7 @@ def score_recipe(recipe, user_ings):
 def recommed_recipe():
 
   icc_db = IccDB("icc")
-  user_ings = icc_db.find_user_ings(returnID=False)
+  user_ings = icc_db.find_user_ings(return_id=False)
 
   cur_score = -100000000
   best_recipe = ""
